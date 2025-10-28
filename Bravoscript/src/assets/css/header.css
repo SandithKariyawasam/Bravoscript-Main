@@ -1,0 +1,74 @@
+.header-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 160px;
+    position:fixed;
+    top: 0;
+    left: 0;
+    background: transparent;
+    z-index: 100;
+}
+
+.header-container img{
+    width: 250px;
+    height: auto;
+    cursor: pointer;
+    background: transparent;
+}
+
+.navbar{
+    height: 3em;
+    width: 45em;
+    border-radius: 30px;
+    border: 1px solid rgba(196, 196, 196, 0.726);
+    background: rgba(122, 122, 122, 0.39);
+    display: flex;  
+    align-items: center;
+}
+
+.navbar ul{
+    flex: 1;
+    list-style: none;
+    background: transparent;
+}
+
+.navbar ul li{
+    display: inline-block;
+    margin: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background: transparent;
+}
+
+button {
+ width: 12em;
+ height: 3em;
+ border-radius: 30em;
+ font-size: 16px;
+ font-family: inherit;
+ border: none;
+ position: relative;
+ overflow: hidden;
+ z-index: 1;
+ border: 2px solid #4C3BCF;
+}
+
+button::before {
+ content: '';
+ width: 0;
+ height: 4em;
+ border-radius: 30em;
+ position: absolute;
+ top: 0;
+ left: 0;
+ background-image: linear-gradient(to right, #3DC2EC 0%, #4B70F5 40%, #4C3BCF 70%, #402E7A 100%);
+ transition: .5s ease;
+ display: block;
+ z-index: -1;
+}
+
+button:hover::before {
+ width: 12em;
+}
