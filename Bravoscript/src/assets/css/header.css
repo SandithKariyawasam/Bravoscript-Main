@@ -5,7 +5,7 @@
     justify-content: space-between;
     padding: 25px 160px;
     position:fixed;
-    top: 0;
+    top: 10px;
     left: 0;
     background: transparent;
     z-index: 100;
@@ -20,10 +20,10 @@
 
 .navbar{
     height: 3em;
-    width: 45em;
+    width: 50em;
     border-radius: 30px;
     border: 1px solid rgba(196, 196, 196, 0.726);
-    background: rgba(122, 122, 122, 0.39);
+    background: rgba(73, 73, 73, 0.596);
     display: flex;  
     align-items: center;
 }
@@ -42,6 +42,142 @@
     background: transparent;
 }
 
+.navbar ul li:hover{
+    color: #ff0000;
+    transition:ease-in-out 2s;
+}
+
+.navbar #isActive{
+    font-weight: 600;
+    color: #ff0000;
+}
+
+.buttonpro {
+  --btn-transition: 0.3s;
+  --btn-letter-spacing: 0.1rem;
+  --btn-animation-duration: 1.2s;
+  --default-btn-color: #fff;
+}
+
+.buttonpro span {
+  letter-spacing: var(--btn-letter-spacing);
+  transition: var(--btn-transition);
+  box-sizing: border-box;
+  position: relative;
+  background: inherit;
+}
+
+.buttonpro span::before {
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  background: inherit;
+}
+.buttonpro:focus {
+  scale: 1.09;
+}
+.buttonpro:hover,
+.buttonpro:focus {
+  background: transparent;
+}
+
+.buttonpro:hover span::before,
+.buttonpro:focus span::before {
+  animation: chitchat linear both var(--btn-animation-duration);
+}
+
+@keyframes chitchat {
+  0% {
+    content: "#";
+  }
+
+  5% {
+    content: ".";
+  }
+
+  10% {
+    content: "^{";
+  }
+
+  15% {
+    content: "-!";
+  }
+
+  20% {
+    content: "#$_";
+  }
+
+  25% {
+    content: "№:0";
+  }
+
+  30% {
+    content: "#{+.";}35%{content: "@}-?";
+  }
+
+  40% {
+    content: "?{4@%";
+  }
+
+  45% {
+    content: "=.,^!";
+  }
+
+  50% {
+    content: "?2@%";
+  }
+
+  55% {
+    content: "\;1}]";
+  }
+
+  60% {
+    content: "?{%:%";
+    right: 0;
+  }
+
+  65% {
+    content: "|{f[4";
+    right: 0;
+  }
+
+  70% {
+    content: "{4%0%";
+    right: 0;
+  }
+
+  75% {
+    content: "'1_0<";
+    right: 0;
+  }
+
+  80% {
+    content: "{0%";
+    right: 0;
+  }
+
+  85% {
+    content: "]>'";
+    right: 0;
+  }
+
+  90% {
+    content: "4";
+    right: 0;
+  }
+
+  95% {
+    content: "2";
+    right: 0;
+  }
+
+  100% {
+    content: "";
+    right: 0;
+  }
+}
+
+
 button {
  width: 12em;
  height: 3em;
@@ -52,23 +188,24 @@ button {
  position: relative;
  overflow: hidden;
  z-index: 1;
- border: 2px solid #4C3BCF;
+ border: 3px solid #ff0000;
+ background-color: #000000;
 }
 
 button::before {
  content: '';
  width: 0;
- height: 4em;
+ height: 3em;
  border-radius: 30em;
  position: absolute;
  top: 0;
  left: 0;
- background-image: linear-gradient(to right, #3DC2EC 0%, #4B70F5 40%, #4C3BCF 70%, #402E7A 100%);
+ background-image: linear-gradient(to right, #ff7e7e 0%, #ff5757 40%, #ff2727 70%, #ff0000 100%);
  transition: .5s ease;
  display: block;
  z-index: -1;
 }
 
 button:hover::before {
- width: 12em;
+ width: 15em;
 }

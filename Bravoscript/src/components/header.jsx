@@ -12,23 +12,23 @@ const header = () => {
             {/* Navbar */}
             <nav className="navbar">
                 <ul className="menu">
-                    <li className="isActive">
-                        Home
+                    <li className="buttonpro" id="isActive">
+                        <span>Home</span>
                     </li>
-                    <li className="">
-                        Templates
+                    <li className="buttonpro">
+                        <span>Templates</span>
                     </li>
-                    <li className="">
-                        Components
+                    <li className="buttonpro">
+                        <span>Components</span>
                     </li>
-                    <li className="">
-                        About
+                    <li className="buttonpro">
+                        <span>About</span>
                     </li>
-                    <li className="">
-                        Community
+                    <li className="buttonpro">
+                        <span>Community</span>
                     </li>
-                    <li className="">
-                        Contact us
+                    <li className="buttonpro">
+                        <span>Contact us</span>
                     </li>
                 </ul>
             </nav>
