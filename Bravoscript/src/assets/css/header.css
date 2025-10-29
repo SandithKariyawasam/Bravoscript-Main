@@ -1,14 +1,15 @@
 .header-container {
-    width: 100%;
+    width: 115vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 25px 160px;
+    padding: 20px 100px;
     position:fixed;
     top: 10px;
     left: 0;
     background: transparent;
     z-index: 100;
+    color: white;
 }
 
 .header-container img{
@@ -26,6 +27,7 @@
     background: rgba(73, 73, 73, 0.596);
     display: flex;  
     align-items: center;
+    text-align: center;
 }
 
 .navbar ul{
@@ -43,13 +45,13 @@
 }
 
 .navbar ul li:hover{
-    color: #ff0000;
+    color: #FF6A00;
     transition:ease-in-out 2s;
 }
 
 .navbar #isActive{
     font-weight: 600;
-    color: #ff0000;
+    color: #FF6A00;
 }
 
 .buttonpro {
@@ -188,7 +190,8 @@ button {
  position: relative;
  overflow: hidden;
  z-index: 1;
- border: 3px solid #ff0000;
+ color: #fff;
+ border: 3px solid #FF6A00;
  background-color: #000000;
 }
 
@@ -200,7 +203,7 @@ button::before {
  position: absolute;
  top: 0;
  left: 0;
- background-image: linear-gradient(to right, #ff7e7e 0%, #ff5757 40%, #ff2727 70%, #ff0000 100%);
+ background-image: linear-gradient(to right, #FF9C33 0%, #ff5757 40%, #ff2727 70%, #FF6A00 100%);
  transition: .5s ease;
  display: block;
  z-index: -1;
