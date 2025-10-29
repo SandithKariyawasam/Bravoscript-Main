@@ -1,11 +1,13 @@
 import React from 'react'
+import './home.css'
+import SectionOne from './sections/section-one'
 
-const home = () => {
+const Home = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <SectionOne />
+    </>
   )
 }
 
-export default home
+export default Home
