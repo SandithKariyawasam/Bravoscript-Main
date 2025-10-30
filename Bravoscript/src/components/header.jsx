@@ -34,7 +34,7 @@ const header = () => {
             </nav>
 
             {/* Buttons */}
-            <button> Get Started
+            <button className='header-btn'> Get Started
             </button>
 
             {/* Mobile Menu Icon */}
