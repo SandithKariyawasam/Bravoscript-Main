@@ -36,7 +36,7 @@
 
 .arrow-group {
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   left: 97%;
   transform: translateY(300%);
   display: flex;
@@ -85,6 +85,7 @@
 .carousel {
   overflow: hidden;
   white-space: nowrap;
+  margin-top: -17px;
   width: 100%;
   background: #070711;
   padding: 1em 0;
@@ -132,7 +133,7 @@
   flex-direction: column;
   gap: 2em;
   align-items: center;
-  padding: 8em 10em;
+  padding: 10em 10em;
   color: white;
   overflow: hidden;
 }
@@ -317,8 +318,9 @@
 
 .container-four {
   display: flex;
-  justify-content: space-around;
-  padding: 4em 40em;
+  justify-content: center;
+  gap: 4em;
+  padding: 5em 0;
   background-color: #070711;
   color: white;
 }
