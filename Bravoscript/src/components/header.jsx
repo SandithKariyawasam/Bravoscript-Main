@@ -1,10 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import '../assets/css/header.css'
 import logo from '../assets/images/Logo.png'
 
 const header = () => {
+
+    const [visible, setVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > 50 && currentScrollY > lastScrollY) {
+                // scrolled more than 100px and moving down
+                setVisible(false);
+            } else if (currentScrollY < lastScrollY + 100) {
+                // scrolling up again → show
+                setVisible(true);
+            }
+
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
+
+
     return (
-        <div className="header-container">
+        <div className={`header-container ${visible ? "show" : "hide"}`}>
 
             {/* Logo */}
             <img src={logo} alt="Logo" />
