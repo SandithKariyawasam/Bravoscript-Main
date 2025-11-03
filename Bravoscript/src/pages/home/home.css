@@ -178,9 +178,6 @@
   border: 2px solid #FF6A00;
   padding: 18px 8px 15px 15px;
   text-align: left;
-  box-shadow:
-    5px 5px 10px #FF6A00,
-    -5px -5px 10px #ffffff;
 }
 
 .shortcut {
@@ -223,7 +220,7 @@
   width: 300px;
   height: 300px;
   margin: 0 auto;
-  background-color: #011522;
+  background-color: transparent;
   cursor: pointer;
   overflow: hidden;
 }
@@ -261,7 +258,7 @@
 
 .rows-container .rowthree {
   position: relative;
-  height: 150px;   
+  height: 150px;
   overflow: hidden;
 }
 
@@ -272,39 +269,79 @@
   width: 100%;
   height: 150px;
   pointer-events: none;
-  
-  background: linear-gradient(to bottom,
-    #0707112f 0%,      /* fully transparent top */
-    #07071175 40%,   /* start soft blur */
-    #070711b9 70%,   /* stronger blur */
-    #070711 100%  /* solid bottom */
-  );
 
-  backdrop-filter: blur(3px); /* strength of the blur behind */
+  background: linear-gradient(to bottom,
+      #0707112f 0%,
+      /* fully transparent top */
+      #07071175 40%,
+      /* start soft blur */
+      #070711b9 70%,
+      /* stronger blur */
+      #070711 100%
+      /* solid bottom */
+    );
+
+  backdrop-filter: blur(3px);
+  /* strength of the blur behind */
 }
 
 .loadmore-btn {
   margin-top: -130px;
- width: 18em;
- height: 3.5em;
- border-radius: 10px;
- font-size: 20px;
- font-family: inherit;
- border: none;
- position: relative;
- overflow: hidden;
- z-index: 1;
- color: #fff;
- border: 3px solid #FF6A00;
- background-color: #000000;
- cursor: pointer;
+  width: 18em;
+  height: 3.5em;
+  border-radius: 10px;
+  font-size: 20px;
+  font-family: inherit;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: #fff;
+  border: 3px solid #FF6A00;
+  background-color: #000000;
+  cursor: pointer;
 }
 
 .loadmore-btn:hover {
- background-color: #FF6A00;
- transition: all 0.5s ease;
+  background-color: #FF6A00;
+  transition: all 0.5s ease;
 }
 
 .loadmore-btn i {
- margin-right: 15px;
+  margin-right: 15px;
+}
+
+
+
+/* section-four */
+
+.container-four {
+  display: flex;
+  justify-content: space-around;
+  padding: 4em 40em;
+  background-color: #070711;
+  color: white;
+}
+
+.contain-four {
+  text-align: center;
+}
+
+.contain-four i {
+  font-size: 3em;
+  color: #FF6A00;
+  margin-bottom: 0.5em;
+}
+
+.contain-four h1 {
+  font-size: 5em;
+  font-weight: bold;
+}
+
+.contain-four p {
+  width: 200px;
+  display: flex;
+  text-align: center;
+  font-size: 1.2em;
+  color: #808080;
 }
