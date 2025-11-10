@@ -353,7 +353,7 @@
 
 .container-five {
   height: 30vw;
-  padding: 5em 0;
+  padding: 6em 0;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -522,8 +522,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vw;
-  padding: 0 300px;
+  height: 80vw;
+  padding: 6em 300px;
   gap: 80px;
   background-color: #070711;
 }
@@ -555,6 +555,7 @@
 }
 
 .cardsix video {
+  width: 80%;
   border: 2px solid #505050;
   border-radius: 20px;
   cursor: pointer;
