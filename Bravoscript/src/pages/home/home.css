@@ -522,8 +522,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vw;
-  padding: 0 450px;
+  height: 65vw;
+  padding: 0 400px;
   gap: 80px;
   background-color: #070711;
 }
