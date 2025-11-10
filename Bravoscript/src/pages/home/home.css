@@ -29,14 +29,14 @@
 }
 
 .sectionone h1 {
-  font-size: 5em;
+  font-size: 4em;
   font-weight: bold;
   margin-bottom: 0.5em;
 }
 
 .arrow-group {
   position: absolute;
-  bottom: 40px;
+  bottom: 90px;
   left: 97%;
   transform: translateY(300%);
   display: flex;
