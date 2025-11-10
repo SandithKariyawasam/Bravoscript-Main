@@ -320,7 +320,7 @@
   display: flex;
   justify-content: center;
   gap: 4em;
-  padding: 5em 0;
+  padding: 4em 0;
   background-color: #070711;
   color: white;
 }
@@ -336,7 +336,7 @@
 }
 
 .contain-four h1 {
-  font-size: 5em;
+  font-size: 4em;
   font-weight: bold;
 }
 
@@ -344,7 +344,7 @@
   width: 200px;
   display: flex;
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1em;
   color: #808080;
 }
 
