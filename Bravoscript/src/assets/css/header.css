@@ -1,9 +1,9 @@
 .header-container {
-  width: 115vw;
+  width: 110vw;
   display: flex;
   align-items: center;
   justify-content: space-between; /* equal space between items */
-  padding: 30px 100px; /* same gap left and right */
+  padding: 30px 150px; /* same gap left and right */
   position: fixed; /* better for headers */
   top: 0;
   left: 0;
@@ -27,7 +27,7 @@
 }
 
 .header-container img {
-  width: 250px;
+  width: 230px;
   height: auto;
   cursor: pointer;
   background: transparent;
@@ -35,7 +35,7 @@
 
 .navbar {
   height: 3em;
-  width: 50em;
+  width: 45em;
   border-radius: 30px;
   border: 1px solid rgba(196, 196, 196, 0.726);
   background: rgba(73, 73, 73, 0.596);
@@ -53,7 +53,7 @@
 .navbar ul li {
   display: inline-block;
   margin: 10px 20px;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   background: transparent;
 }
@@ -201,8 +201,8 @@
 
 
 .header-btn {
-  width: 12em;
-  height: 3em;
+  width: 10em;
+  height: 2.8em;
   border-radius: 30em;
   font-size: 16px;
   font-family: inherit;
