@@ -100,12 +100,14 @@ const Icon = () => {
 
         // ✅ Setup Three.js Scene
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x00000000);
+        scene.background = new THREE.Color(0x070711);
 
         camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 100);
-        camera.position.set(-1, 0, 0).setLength(15);
+        camera.position.set(0, 5, 15).setLength(21);
 
-        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setClearColor(0x000000, 0); // transparent background
+
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
         containerRef.current.appendChild(renderer.domElement);
@@ -127,10 +129,7 @@ const Icon = () => {
         // ✅ Load Models
         const loader = new GLTFLoader();
         (async () => {
-            const head = (await loader.loadAsync("https://threejs.org/examples/models/gltf/LeePerrySmith/LeePerrySmith.glb")).scene.children[0];
-            head.geometry.rotateY(Math.PI * 0.01);
-            head.material = new THREE.MeshMatcapMaterial({ color: 0xffffff });
-            scene.add(head);
+            
 
             helmet = (await loader.loadAsync("https://threejs.org/examples/models/gltf/DamagedHelmet/glTF/DamagedHelmet.gltf")).scene.children[0];
             const helmetUniforms = { texBlob: { value: blob.rtOutput.texture } };
@@ -167,10 +166,10 @@ const Icon = () => {
             helmetWire = new THREE.Mesh(
                 helmet.geometry.clone().rotateX(Math.PI * 0.5),
                 new THREE.MeshBasicMaterial({
-                    color: 0x000000,
+                    color: 0xFF6A00,
                     wireframe: true,
                     transparent: true,
-                    opacity: 0.25,
+                    opacity: 1,
                     onBeforeCompile: (shader) => {
                         shader.uniforms.time = gu.time;
                         shader.vertexShader = `
@@ -253,7 +252,13 @@ const Icon = () => {
 
     }, []);
 
-    return <div ref={containerRef} style={{ width: "100vw", height: "100vh" }} />;
+    return (
+        <>
+            <div ref={containerRef} className="icon" />
+        </>
+
+
+    );
 };
 
 export default Icon;
