@@ -204,6 +204,7 @@ h1::selection {
 .shortcut i {
   margin: auto;
   font-size: 20px;
+  background: transparent;
 }
 
 .search_bar {
