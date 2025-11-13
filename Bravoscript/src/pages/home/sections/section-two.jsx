@@ -27,26 +27,27 @@ const SectionTwo = () => {
                 <div className="carousel-track">
                     {/* First set of logos */}
                     {logos.map((logo, i) => (
-                        <div className="card" >
+                        <div className="card" key={`set1-${i}`}>
                             <img src={logo} alt={`Customer ${i + 1}`} />
                         </div>
                     ))}
 
-                    {/* Second logos for seamless infinite scroll */}
+                    {/* Second set for seamless infinite scroll */}
                     {logos.map((logo, i) => (
-                        <div className="card">
+                        <div className="card" key={`set2-${i}`}>
                             <img src={logo} alt={`Customer ${i + 1}`} />
                         </div>
                     ))}
 
-                    {/* Third logos for seamless infinite scroll */}
+                    {/* Third set for seamless infinite scroll */}
                     {logos.map((logo, i) => (
-                        <div className="card">
+                        <div className="card" key={`set3-${i}`}>
                             <img src={logo} alt={`Customer ${i + 1}`} />
                         </div>
                     ))}
                 </div>
             </div>
+
         </>
     )
 }
