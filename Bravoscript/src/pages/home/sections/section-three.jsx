@@ -1,9 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from "react";
 import video from "../../../assets/videos/white.mp4"
 
 const SectionThree = () => {
 
     const row = Array.from({ length: 8 }, (_, i) => `Card ${i + 1}`);
+
+    const [html, setHtml] = useState("<h1>Hello World</h1>");
+    const [css, setCss] = useState("h1 { color: red; text-align: center; }");
+    const [js, setJs] = useState("console.log('JS Running')");
+    const [srcDoc, setSrcDoc] = useState("");
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            const source = `
+            <html>
+              <head>
+                <style>${css}</style>
+              </head>
+              <body>
+                ${html}
+                <script>
+                  try {
+                    ${js}
+                  } catch (err) {
+                    console.error(err);
+                  }
+                </script>
+              </body>
+            </html>
+          `;
+            setSrcDoc(source);
+        }, 300); // delay for auto-update
+
+        return () => clearTimeout(timeout);
+    }, [html, css, js]);
 
     return (
         <>
@@ -24,15 +54,12 @@ const SectionThree = () => {
                         {row.map((item, i) => (
                             <div key={`row1-${i}`} className="sectionthree-card">
                                 <div className="card__content">
-                                    <video
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
+                                    <iframe
+                                        srcDoc={srcDoc}
+                                        title={`project-${i}`}
                                         className="card-video"
-                                    >
-                                        <source src={video} type="video/mp4" />
-                                    </video>
+                                        sandbox="allow-scripts allow-same-origin" // allow-same-origin if you need cookies/localStorage
+                                    />
                                 </div>
                             </div>
                         ))}
@@ -42,15 +69,12 @@ const SectionThree = () => {
                         {row.map((item, i) => (
                             <div key={`row2-${i}`} className="sectionthree-card">
                                 <div className="card__content">
-                                    <video
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
+                                    <iframe
+                                        srcDoc={srcDoc}
+                                        title={`project-${i}`}
                                         className="card-video"
-                                    >
-                                        <source src={video} type="video/mp4" />
-                                    </video>
+                                        sandbox="allow-scripts allow-same-origin" // allow-same-origin if you need cookies/localStorage
+                                    />
                                 </div>
                             </div>
                         ))}
@@ -60,15 +84,12 @@ const SectionThree = () => {
                         {row.map((item, i) => (
                             <div key={`row3-${i}`} className="sectionthree-card">
                                 <div className="card__content">
-                                    <video
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
+                                    <iframe
+                                        srcDoc={srcDoc}
+                                        title={`project-${i}`}
                                         className="card-video"
-                                    >
-                                        <source src={video} type="video/mp4" />
-                                    </video>
+                                        sandbox="allow-scripts allow-same-origin" // allow-same-origin if you need cookies/localStorage
+                                    />
                                 </div>
                             </div>
                         ))}
