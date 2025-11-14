@@ -60,6 +60,7 @@ const SectionThree = () => {
                                         className="card-video"
                                         sandbox="allow-scripts allow-same-origin" // allow-same-origin if you need cookies/localStorage
                                     />
+                                    <span><i class="fa-duotone fa-solid fa-code"></i>Get code</span>
                                 </div>
                             </div>
                         ))}
@@ -75,6 +76,7 @@ const SectionThree = () => {
                                         className="card-video"
                                         sandbox="allow-scripts allow-same-origin" // allow-same-origin if you need cookies/localStorage
                                     />
+                                    <span><i class="fa-duotone fa-solid fa-code"></i>Get code</span>
                                 </div>
                             </div>
                         ))}
