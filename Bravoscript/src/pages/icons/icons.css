@@ -1,0 +1,50 @@
+.iconone {
+    display: flex;
+    flex-direction: column;
+    padding: 8% 10%;
+    background-color: #070711;
+    color: #fff;
+}
+
+.iconone h1 {
+    color: #fff;
+}
+
+.iconone p {
+    color: #777777;
+}
+
+.iconone .parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 25px;
+    gap: 25px;
+}
+
+.parent .child {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.child .divone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 400px;
+    background-color: #242424;
+    border-radius: 10px;
+}
+
+.divone iframe {
+    position: static;
+    width: 300px;
+    height: 400px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
