@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../assets/css/header.css'
 import logo from '../assets/images/Logo.png'
 
 const header = () => {
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const isActive = (path) => (location.pathname === path ? "isActive" : "");
 
     const [visible, setVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
@@ -36,24 +43,42 @@ const header = () => {
             {/* Navbar */}
             <nav className="navbar">
                 <ul className="menu">
-                    <li className="buttonpro" id="isActive">
-                        <span>Home</span>
-                    </li>
-                    <li className="buttonpro">
-                        <span>Templates</span>
-                    </li>
-                    <li className="buttonpro">
-                        <span>Components</span>
-                    </li>
-                    <li className="buttonpro">
-                        <span>About</span>
-                    </li>
-                    <li className="buttonpro">
-                        <span>Community</span>
-                    </li>
-                    <li className="buttonpro">
-                        <span>Contact us</span>
-                    </li>
+
+                    <Link to="/">
+                        <li className="buttonpro" id={isActive("/")}>
+                            <span>Home</span>
+                        </li>
+                    </Link>
+
+                    <Link to="/templates">
+                        <li className="buttonpro" id={isActive("/templates")}>
+                            <span>Templates</span>
+                        </li>
+                    </Link>
+
+                    <Link to="/components">
+                        <li className="buttonpro" id={isActive("/components")}>
+                            <span>Components</span>
+                        </li>
+                    </Link>
+
+                    <Link to="/about">
+                        <li className="buttonpro" id={isActive("/about")}>
+                            <span>About</span>
+                        </li>
+                    </Link>
+
+                    <Link to="/community">
+                        <li className="buttonpro" id={isActive("/community")}>
+                            <span>Community</span>
+                        </li>
+                    </Link>
+
+                    <Link to="/contact">
+                        <li className="buttonpro" id={isActive("/contact")}>
+                            <span>Contact us</span>
+                        </li>
+                    </Link>
                 </ul>
             </nav>
 
