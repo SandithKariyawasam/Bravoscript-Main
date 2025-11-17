@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 const SectionOne = () => {
     const [html, setHtml] = useState("<h1>Hello World</h1>");
-    const [css, setCss] = useState("h1 { color: red; text-align: center; }");
+    const [css, setCss] = useState("h1 { color: red; text-align: center;}");
     const [js, setJs] = useState("console.log('JS Running')");
     const [srcDoc, setSrcDoc] = useState("");
 
@@ -11,10 +11,45 @@ const SectionOne = () => {
             const source = `
         <html>
           <head>
-            <style>${css}</style>
+            <style>
+
+              /* Your user's CSS */
+              ${css}
+
+              /* Custom Scrollbar Styles */
+              ::-webkit-scrollbar {
+                width: 10px;
+              }
+
+              ::-webkit-scrollbar-track {
+                background: #00000000;
+              }
+
+              ::-webkit-scrollbar-thumb {
+                 background-color: #555;
+                 border-radius: 50px;
+              }
+
+              ::-webkit-scrollbar-button {
+                 display: none;
+                 /* hide top/bottom arrows */
+              }
+
+              ::-webkit-scrollbar-thumb:hover {
+                background: #888;
+              }
+
+              /* Firefox */
+              html {
+                scrollbar-width: thin;
+                scrollbar-color: #555 #1e1e1e;
+              }
+
+            </style>
           </head>
           <body>
             ${html}
+
             <script>
               try {
                 ${js}
@@ -22,14 +57,16 @@ const SectionOne = () => {
                 console.error(err);
               }
             </script>
+
           </body>
         </html>
       `;
             setSrcDoc(source);
-        }, 300); // delay for auto-update
+        }, 300);
 
         return () => clearTimeout(timeout);
     }, [html, css, js]);
+
 
     const [activeTab, setActiveTab] = useState("html");
 
@@ -37,7 +74,7 @@ const SectionOne = () => {
     const cssRef = useRef(null);
     const jsRef = useRef(null);
 
-    
+
 
     return (
         <div className="container-tab">
