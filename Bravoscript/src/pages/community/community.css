@@ -7,7 +7,7 @@
     color: #FF6A00;
 }
 
-h1 {
+.text {
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
