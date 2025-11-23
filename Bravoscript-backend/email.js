@@ -2,11 +2,23 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 
-// Define the route (Note: we just use '/' here, see Step 2 for why)
+// Import the database connection
+const db = require('./firebase');
+
 router.post('/send-email', async (req, res) => {
     const { name, email, message } = req.body;
 
     try {
+        // --- STEP A: Save to Firebase ---
+        await db.collection('contacts').add({
+            name: name,
+            email: email,
+            message: message,
+            submittedAt: new Date().toISOString() // Save the time
+        });
+        console.log("Data saved to Firestore");
+
+        // --- STEP B: Send Email (Your existing code) ---
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -23,13 +35,14 @@ router.post('/send-email', async (req, res) => {
         };
 
         await transporter.sendMail(mailOptions);
-        res.status(200).json({ message: 'Email sent successfully!' });
+        
+        // Send success response
+        res.status(200).json({ message: 'Data saved and email sent!' });
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error sending email', error });
+        console.error("Error processing request:", error);
+        res.status(500).json({ message: 'Something went wrong', error: error.toString() });
     }
 });
 
-// Export the router so index.js can use it
 module.exports = router;
