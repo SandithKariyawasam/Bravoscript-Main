@@ -57,5 +57,15 @@ const getCode = async (req, res) => {
     }
 };
 
+const getLatestCodes = async (req, res) => {
+    try {
+        const snippets = await SnippetModel.getLatestSnippets();
+        res.status(200).json(snippets);
+    } catch (error) {
+        console.error("Error fetching latest:", error);
+        res.status(500).json({ message: "Server Error" });
+    }
+};
+
 // Export BOTH functions
-module.exports = { saveCode, getCode };
+module.exports = { saveCode, getCode, getLatestCodes };
