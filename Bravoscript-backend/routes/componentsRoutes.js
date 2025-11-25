@@ -6,6 +6,8 @@ const snippetController = require('../controllers/componentsController');
 // POST http://localhost:3000/api/code/save
 router.post('/save', snippetController.saveCode);
 
+router.get('/latest', snippetController.getLatestCodes);
+
 // GET http://localhost:3000/api/code/:id  (e.g., /api/code/project1)
 router.get('/:id', snippetController.getCode);
 
