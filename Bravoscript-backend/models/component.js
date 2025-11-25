@@ -4,7 +4,7 @@ const db = require('../firebase'); // Import your existing firebase connection
 const collectionName = 'code_snippets';
 
 class SnippetModel {
-    
+
     // Create or Update a snippet
     static async createSnippet(data) {
         // If an ID is provided, use it as the document ID. 
@@ -25,6 +25,20 @@ class SnippetModel {
             return null;
         }
         return { id: doc.id, ...doc.data() };
+    }
+
+    static async getLatestSnippets() {
+        try {
+            const snapshot = await db.collection('code_snippets')
+                .orderBy('createdAt', 'desc') // Sort by newest date
+                .limit(6)                     // Get only 6
+                .get();
+
+            // Convert Firestore docs to simple JSON array
+            return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        } catch (error) {
+            throw error;
+        }
     }
 }
 
