@@ -1,44 +1,50 @@
 
 const SnippetModel = require('../models/component');
+const { generatePreviewCode } = require('./aiController'); 
 
 // 1. Controller to Save Code (THE FIXED VERSION)
 const saveCode = async (req, res) => {
     try {
         const { id, html, css, javascript } = req.body;
 
-        // Basic Validation
         if (!html && !css && !javascript) {
-            return res.status(400).json({ message: "At least one code field is required." });
+            return res.status(400).json({ message: "Required fields missing" });
         }
 
-        // PREPARE DATA: Create object without ID first to avoid "undefined" error
+        // 1. ASK GEMINI TO OPTIMIZE CSS
+        let previewCss = css; // Default to normal CSS
+        try {
+            console.log("Asking Gemini AI...");
+            previewCss = await generatePreviewCode(html, css);
+        } catch (err) {
+            console.log("AI skipped due to error, using normal CSS");
+        }
+
+        // 2. SAVE TO DATABASE
         const snippetData = {
             html: html || "",
             css: css || "",
             javascript: javascript || "",
+            previewCss: previewCss, // Save the AI version
             createdAt: new Date().toISOString()
         };
 
-        // Only add ID if the user actually sent one (not null/undefined/empty)
-        if (id) {
-            snippetData.id = id;
-        }
+        if (id) snippetData.id = id;
 
-        // Call the Model
         const savedId = await SnippetModel.createSnippet(snippetData);
 
         res.status(201).json({ 
-            message: "Code saved successfully", 
+            message: "Code saved with AI optimization!", 
             id: savedId 
         });
 
     } catch (error) {
-        console.error("Error saving code:", error);
+        console.error("Error:", error);
         res.status(500).json({ message: "Server Error", error: error.message });
     }
 };
 
-// 2. Controller to Get Code (THIS WAS MISSING)
+// 2. Controller to Get Code
 const getCode = async (req, res) => {
     try {
         const { id } = req.params;
@@ -67,5 +73,5 @@ const getLatestCodes = async (req, res) => {
     }
 };
 
-// Export BOTH functions
+
 module.exports = { saveCode, getCode, getLatestCodes };
