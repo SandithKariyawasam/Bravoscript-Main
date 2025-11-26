@@ -581,6 +581,12 @@ h1::selection {
   position: relative;
   width: 350px;
   height: 350px;
+  background-color: #070711;
+  /* Ensure the card itself is dark behind the iframe */
+  border-radius: 20px;
+  /* Match iframe radius */
+  overflow: hidden;
+  /* Clip corners */
 }
 
 .cardsix iframe {
@@ -588,6 +594,8 @@ h1::selection {
   height: 100%;
   border: 2px solid #333;
   border-radius: 20px;
+  /* Ensure iframe is transparent so body color shows */
+  background: transparent;
 }
 
 .cardsix span {
@@ -604,8 +612,13 @@ h1::selection {
   font-weight: bold;
   color: #ffffff;
   border-radius: 10px;
-  background: rgba(0, 0, 0, 0);
+  /* Add a slight dark background to the text so it's readable over components */
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  /* Optional: cool glass effect */
   cursor: pointer;
+  z-index: 10;
+  /* CRITICAL: Ensures button is on top of iframe */
 }
 
 .cardsix span i {
