@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../assets/css/header.css'
 import logo from '../assets/images/Logo.png'
@@ -32,6 +31,13 @@ const header = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
+
+    const [showNavbar, setShowNavbar] = useState(false);
+
+    // 2. Function to toggle the state
+    const handleShowNavbar = () => {
+        setShowNavbar(!showNavbar);
+    };
 
 
     return (
@@ -87,10 +93,54 @@ const header = () => {
             </button>
 
             {/* Mobile Menu Icon */}
-            <div className="show-menu">
+            <div className="show-menu" onClick={handleShowNavbar}>
                 <span></span>
                 <span></span>
                 <span></span>
+            </div>
+
+            <div className={`nav-elements ${showNavbar ? 'active' : ''}`}>
+                <i
+                    className="fa-solid fa-xmark"
+                    onClick={handleShowNavbar}
+                ></i>
+                <ul>
+                    <Link to="/">
+                        <li id={isActive("/")}>
+                            <span>Home</span>
+                        </li>
+                    </Link>
+
+                    <Link to="/templates">
+                        <li id={isActive("/templates")}>
+                            <span>Templates</span>
+                        </li>
+                    </Link>
+
+                    <Link to="/components">
+                        <li id={isActive("/components")}>
+                            <span>Components</span>
+                        </li>
+                    </Link>
+
+                    <Link to="/about">
+                        <li id={isActive("/about")}>
+                            <span>About</span>
+                        </li>
+                    </Link>
+
+                    <Link to="/community">
+                        <li id={isActive("/community")}>
+                            <span>Community</span>
+                        </li>
+                    </Link>
+
+                    <Link to="/contact">
+                        <li id={isActive("/contact")}>
+                            <span>Contact us</span>
+                        </li>
+                    </Link>
+                </ul>
             </div>
         </div>
     )
