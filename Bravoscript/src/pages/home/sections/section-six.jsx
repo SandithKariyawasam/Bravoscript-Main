@@ -7,7 +7,7 @@ const SectionSix = () => {
     useEffect(() => {
         const fetchLatest = async () => {
             try {
-                const res = await fetch('https://bravoscript-main.vercel.app/api/code/latest');
+                const res = await fetch('http://localhost:3000/api/code/latest');
                 const data = await res.json();
 
                 if (Array.isArray(data)) {

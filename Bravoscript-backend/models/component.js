@@ -31,7 +31,7 @@ class SnippetModel {
         try {
             const snapshot = await db.collection('code_snippets')
                 .orderBy('createdAt', 'desc') // Sort by newest date
-                .limit(6)                     // Get only 6
+                .limit(24)                     // Get only 6
                 .get();
 
             // Convert Firestore docs to simple JSON array
