@@ -89,7 +89,7 @@ const SectionSix = () => {
     const SnippetCard = ({ item }) => (
         <div className="cardsix" key={item.id}>
             <iframe
-                srcDoc={getSrcDoc(item.html, item.previewCss || item.css, item.javascript)}
+                srcDoc={getSrcDoc(item.html, item.css, item.javascript)}
                 title={`project-${item.id}`}
                 className="card-video"
                 sandbox="allow-scripts"
@@ -105,6 +105,9 @@ const SectionSix = () => {
             <div className="container-six">
                 <h1>Latest New Posts</h1>
                 <div className="container-cards">
+                <p className='three-elementstwo' style={{color:'grey', display:'flex', justifyContent:'center'}}>
+                    Some of the latest code snippets take few seconds to load.
+                </p>
 
                     {/* --- ROW 1 (Items 0 to 3) --- */}
                     <div className="cardsrow">
