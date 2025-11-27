@@ -1,112 +1,141 @@
-import React, { useState, useEffect, useRef } from "react";
-import video from "../../../assets/videos/white.mp4"
+import React, { useState, useEffect } from "react";
 
 const SectionThree = () => {
+    const [snippets, setSnippets] = useState([]);
 
-    const row = Array.from({ length: 8 }, (_, i) => `Card ${i + 1}`);
+    const row = Array.from({ length: 8 });
 
-    const [html, setHtml] = useState("<h1>Hello World</h1>");
-    const [css, setCss] = useState("h1 { color: red; text-align: center; }");
-    const [js, setJs] = useState("console.log('JS Running')");
-    const [srcDoc, setSrcDoc] = useState("");
+    const getSrcDoc = (html, css, js) => {
+        const cleanHtml = html
+            ? html
+                .replace(/<script[^>]*src=".*\/main\.j(s|sx)"[^>]*>[\s\S]*?<\/script>/gi, "")
+                .replace(/<script\b[^>]*src=["'](?!http)[^"']*["'][^>]*>[\s\S]*?<\/script>/gi, "")
+                .replace(/<link\b[^>]*rel=["']stylesheet["'][^>]*href=["'](?!http)[^"']*["'][^>]*>/gi, "")
+            : "";
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            const source = `
+        return `
             <html>
               <head>
-                <style>${css}</style>
+                <script>
+                  window.addEventListener('error', function(e) { console.error("Snippet Error:", e.error); });
+                </script>
+                <style>
+                    html, body { margin: 0 !important; padding: 0 !important; width: 100%; height: 100vh; overflow: hidden; background: transparent; }
+                    body { display: flex; justify-content: center; align-items: center; }
+                    
+                    #preview-wrapper {
+                        width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;
+                        transform: scale(1);
+                        transform-origin: center center;
+                    }
+                    ${css}
+                </style>
               </head>
               <body>
-                ${html}
-                <script>
-                  try {
-                    ${js}
-                  } catch (err) {
-                    console.error(err);
-                  }
-                </script>
+                <div id="preview-wrapper">${cleanHtml}</div>
+                <script type="module">${js}</script>
               </body>
             </html>
-          `;
-            setSrcDoc(source);
-        }, 300); // delay for auto-update
+        `;
+    };
 
-        return () => clearTimeout(timeout);
-    }, [html, css, js]);
+    useEffect(() => {
+        const fetchLatest = async () => {
+            try {
+                const res = await fetch('https://bravoscript-main.vercel.app/api/code/latest');
+                const data = await res.json();
 
-    return (
-        <>
-            <div className="sectionthree">
-                <p className='three-elementsone'><i className="fa-solid fa-rocket"></i>37 new elements this week!</p>
-                <h2>The Largest Library of Open-Source Components</h2>
-                <p className='three-elementstwo'>
-                    Community-built library of UI components. Copy as HTML/CSS, Tailwind, React and Figma.
-                </p>
+                if (Array.isArray(data)) {
+                    setSnippets(data);
+                }
+            } catch (error) {
+                console.error("Error loading snippets:", error);
+            }
+        };
 
-                <label className="label">
-                    <div className="shortcut"><i className="fa-solid fa-magnifying-glass"></i></div>
-                    <input type="text" className="search_bar" placeholder="Search Components..." />
-                </label>
+        fetchLatest();
+    }, []);
 
-                <div className="rows-container">
-                    <div className="row" style={{ marginLeft: "10em" }}>
-                        {row.map((item, i) => (
-                            <div key={`row1-${i}`} className="sectionthree-card">
-                                <div className="card__content">
-                                    <iframe
-                                        srcDoc={srcDoc}
-                                        title={`project-${i}`}
-                                        className="card-video"
-                                        sandbox="allow-scripts allow-same-origin" // allow-same-origin if you need cookies/localStorage
-                                    />
-                                    <span><i class="fa-duotone fa-solid fa-code"></i>Get code</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="row" style={{ marginRight: "10em" }}>
-                        {row.map((item, i) => (
-                            <div key={`row2-${i}`} className="sectionthree-card">
-                                <div className="card__content">
-                                    <iframe
-                                        srcDoc={srcDoc}
-                                        title={`project-${i}`}
-                                        className="card-video"
-                                        sandbox="allow-scripts allow-same-origin" // allow-same-origin if you need cookies/localStorage
-                                    />
-                                    <span><i class="fa-duotone fa-solid fa-code"></i>Get code</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="row rowthree" style={{ marginLeft: "10em" }}>
-                        {row.map((item, i) => (
-                            <div key={`row3-${i}`} className="sectionthree-card">
-                                <div className="card__content">
-                                    <iframe
-                                        srcDoc={srcDoc}
-                                        title={`project-${i}`}
-                                        className="card-video"
-                                        sandbox="allow-scripts allow-same-origin" // allow-same-origin if you need cookies/localStorage
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                        <div className="blur-overlay"></div>
+    // --- 3. SUB-COMPONENT: The Card ---
+    const SnippetCard = ({ item }) => {
+        if (!item) {
+            return (
+                <div className="sectionthree-card">
+                    <div className="card__content">
+                        <iframe
+                            srcDoc="<html><body style='display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#000;'><h1 style='color:red;font-family:sans-serif;'>Loading...</h1></body></html>"
+                            className="card-video"
+                            title="placeholder"
+                        />
                     </div>
                 </div>
+            )
+        }
 
-                <button className='loadmore-btn'>
-                    <i className="fa-solid fa-rocket"></i>Browse all components
-                </button>
+        return (
+            <div className="sectionthree-card" key={item._id || item.id}>
+                <div className="card__content">
+                    <iframe
+                        srcDoc={getSrcDoc(item.html, item.css, item.js)}
+                        title={`project-${item._id}`}
+                        className="card-video"
+                        sandbox="allow-scripts"
+                        loading="lazy"
+                    />
+                    <span onClick={() => navigator.clipboard.writeText(item.css)}>
+                        <i className="fa-duotone fa-solid fa-code"></i>Get code
+                    </span>
+                </div>
             </div>
-        </>
-    )
-}
+        );
+    };
 
-export default SectionThree
+    return (
+        <div className="sectionthree">
+            <p className='three-elementsone'><i className="fa-solid fa-rocket"></i>Fresh Elements</p>
+            <h2>The Largest Library of Open-Source Components</h2>
+            <p className='three-elementstwo'>
+                Community-built library of UI components. Copy as HTML/CSS, Tailwind, React and Figma.
+            </p>
+
+            <label className="label">
+                <div className="shortcut"><i className="fa-solid fa-magnifying-glass"></i></div>
+                <input type="text" className="search_bar" placeholder="Search Components..." />
+            </label>
+
+            <div className="rows-container">
+
+                {/* --- ROW 1 (Items 0 to 8) --- */}
+                <div className="row" style={{ marginLeft: "10em" }}>
+                    {row.map((_, i) => (
+                        <SnippetCard item={snippets[i]} key={`r1-${i}`} />
+                    ))}
+                </div>
+
+                {/* --- ROW 2 (Items 8 to 16) --- */}
+                <div className="row" style={{ marginRight: "10em" }}>
+                    {row.map((_, i) => (
+                        <SnippetCard item={snippets[i + 8]} key={`r2-${i}`} />
+                    ))}
+                </div>
+
+                {/* --- ROW 3 (Items 16 to 24) --- */}
+                <div className="row rowthree" style={{ marginLeft: "10em" }}>
+                    {row.map((_, i) => (
+                        <SnippetCard item={snippets[i + 16]} key={`r3-${i}`} />
+                    ))}
+                    <div className="blur-overlay"></div>
+                </div>
+
+            </div>
+
+            <button className='loadmore-btn'>
+                <i className="fa-solid fa-rocket"></i>Browse all components
+            </button>
+        </div>
+    );
+};
+
+export default SectionThree;
 
 
