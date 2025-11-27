@@ -10,54 +10,57 @@ const generatePreviewCode = async (html, css) => {
     const prompt = `
       You are an expert Frontend Engineer.
       I have a user-submitted HTML/CSS component.
-      I need to display it inside a 350px by 350px Preview Card.
       
-      Your Goal: 
-      Generate a CSS string that centers the component perfectly.
+      Your Goals:
+      1. Generate CSS to center the component in a 350x350px box.
+      2. ANALYZE the component and classify its size.
 
-      RULES:
-      1. STRICT SCALING: 
-         - You must ALWAYS use 'transform: scale(1)' on the body.
-         - DO NOT shrink the content (do not use 0.5, 0.6, etc).
-         - EXCEPTION: Only if the component is tiny (like a single button or badge), you may use 'transform: scale(1.3)' to make it clearer. Otherwise, keep it at 1.0.
-      
-      2. CENTER EVERYTHING:
-         - The 'body' must have:
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           min-height: 100vh;
-           margin: 0;
-           padding: 0;
-           overflow: hidden;
-           transform-origin: center center;
+      ---
+      RULE 1: CLASSIFY THE SIZE
+      Determine if the component is "Small", "Medium", or "Large".
+      - "Small": Buttons, Toggles, Badges, Icons, Inputs, Loaders.
+      - "Medium": Cards, Login Forms, Profile Widgets, Alerts, pricing tables.
+      - "Large": Navbars, Hero Sections, Footers, Full Page Layouts, Dashboards.
 
-      3. PREVENT CROPPING:
-         - Ensure 'box-sizing: border-box' is applied globally.
-      
-      User HTML: 
-      ${html}
+      RULE 2: STRICT SCALING
+      - Always use 'transform: scale(1)' on the body.
+      - Exception: If size is "Small", you may use 'transform: scale(1.5)' to make it more visible.
 
-      User CSS: 
-      ${css}
+      RULE 3: CENTER EVERYTHING
+      - The 'body' must have: display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 0; overflow: hidden; transform-origin: center center;
 
+      User HTML: ${html}
+      User CSS: ${css}
+
+      ---
       RETURN JSON ONLY (No markdown):
-      { "previewCss": "YOUR_GENERATED_CSS_HERE" }
+      { 
+        "previewCss": "YOUR_GENERATED_CSS_HERE",
+        "componentSize": "Small" 
+      }
     `;
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
 
+    // Clean markdown
     const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
     const jsonResponse = JSON.parse(cleanedText);
     
-    return jsonResponse.previewCss;
+    // Return the WHOLE object (CSS + Size)
+    return {
+        previewCss: jsonResponse.previewCss,
+        componentSize: jsonResponse.componentSize || "Medium" // Default to Medium if AI forgets
+    };
 
   } catch (error) {
     console.error("Gemini AI Error:", error);
-    // Fallback: Force scale 1 if AI fails
-    return `body { transform: scale(1); transform-origin: center center; display: flex; justify-content: center; align-items: center; min-height: 100vh; } ${css}`; 
+    // Fallback: Return basic CSS and 'Medium' size
+    return {
+        previewCss: `body { transform: scale(1); display: flex; justify-content: center; align-items: center; min-height: 100vh; } ${css}`,
+        componentSize: "Medium"
+    };
   }
 };
 
