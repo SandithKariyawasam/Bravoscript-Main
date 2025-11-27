@@ -379,7 +379,7 @@ h1::selection {
 
 
 .container-five {
-  height: 30vw;
+  height: auto;
   padding: 6em 0;
   display: flex;
   justify-content: center;
@@ -549,8 +549,8 @@ h1::selection {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 65vw;
-  padding: 0 400px;
+  height: auto;
+  padding: 0 400px  80px ;
   gap: 80px;
   background-color: #070711;
 }
