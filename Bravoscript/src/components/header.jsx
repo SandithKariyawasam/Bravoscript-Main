@@ -74,12 +74,6 @@ const header = () => {
                         </li>
                     </Link>
 
-                    <Link to="/community">
-                        <li className="buttonpro" id={isActive("/community")}>
-                            <span>Community</span>
-                        </li>
-                    </Link>
-
                     <Link to="/contact">
                         <li className="buttonpro" id={isActive("/contact")}>
                             <span>Contact us</span>
@@ -126,12 +120,6 @@ const header = () => {
                     <Link to="/about">
                         <li id={isActive("/about")}>
                             <span>About</span>
-                        </li>
-                    </Link>
-
-                    <Link to="/community">
-                        <li id={isActive("/community")}>
-                            <span>Community</span>
                         </li>
                     </Link>
 
