@@ -360,6 +360,10 @@
 
 
 @media (max-width: 768px) {
+  .header-container {
+    padding: 30px 40px;
+  }
+
   .header-container img {
     width: 300px;
   }
@@ -382,6 +386,10 @@
 
 
 @media (max-width: 576px) {
+  .header-container {
+    padding: 30px 30px;
+  }
+
   .header-container img {
     width: 250px;
   }
@@ -408,6 +416,10 @@
 
 
 @media (max-width: 400px) {
+  .header-container {
+    padding: 30px 20px;
+  }
+
   .header-container img {
     width: 150px;
   }

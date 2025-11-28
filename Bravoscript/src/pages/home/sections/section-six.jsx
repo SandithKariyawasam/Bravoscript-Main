@@ -105,7 +105,7 @@ const SectionSix = () => {
             <div className="container-six">
                 <h1>Latest New Posts</h1>
                 <div className="container-cards">
-                <p className='three-elementstwo' style={{color:'grey', display:'flex', justifyContent:'center'}}>
+                <p className='three-elementstwo' style={{color:'grey', display:'flex', justifyContent:'center', textAlign:'center'}}>
                     Some of the latest code snippets take few seconds to load.
                 </p>
 
