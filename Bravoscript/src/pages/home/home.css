@@ -1141,6 +1141,10 @@ h1::selection {
 
 @media (max-width: 400px) {
 
+  .homecontainer {
+    height: 80vh;
+  }
+
   .carousel-track {
     gap: 1em;
     animation: scroll 5s linear infinite;
