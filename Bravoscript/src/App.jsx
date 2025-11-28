@@ -12,6 +12,8 @@ import Contact from './pages/contactus/contactus'
 import Icons from './pages/icons/icons'
 import Templates from './pages/templates/templates'
 
+import Upload from './dashboard/upload.jsx'
+
 function App() {
   return (
     <BrowserRouter>
