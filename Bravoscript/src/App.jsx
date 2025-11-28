@@ -30,7 +30,7 @@ function App() {
         <Route path="/dashboard/upload" element={<Upload />} />
       </Routes>
 
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   )
 }

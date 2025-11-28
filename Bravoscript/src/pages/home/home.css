@@ -130,7 +130,7 @@ h1::selection {
   flex-direction: column;
   gap: 2em;
   align-items: center;
-  padding: 10em 10em;
+  padding: 5em 10em;
   color: white;
   overflow: hidden;
 }
@@ -340,7 +340,7 @@ h1::selection {
   display: flex;
   justify-content: center;
   gap: 4em;
-  padding: 4em 0;
+  padding: 2em 0;
   background-color: #070711;
   color: white;
 }
@@ -373,7 +373,7 @@ h1::selection {
 
 .container-five {
   height: auto;
-  padding: 6em 0;
+  padding: 5em 0;
   display: flex;
   justify-content: center;
   gap: 20px;
