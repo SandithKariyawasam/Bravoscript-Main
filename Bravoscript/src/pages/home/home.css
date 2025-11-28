@@ -48,7 +48,6 @@ h1::selection {
   animation: fall 2s linear infinite;
 }
 
-/* each arrow starts a bit later, so you see continuous motion */
 .arrow:nth-child(1) {
   animation-delay: 0s;
   color: #FF6A00;
@@ -273,17 +272,11 @@ h1::selection {
 
   background: linear-gradient(to bottom,
       #0707112f 0%,
-      /* fully transparent top */
       #07071175 40%,
-      /* start soft blur */
       #070711b9 70%,
-      /* stronger blur */
-      #070711 100%
-      /* solid bottom */
-    );
+      #070711 100%);
 
   backdrop-filter: blur(3px);
-  /* strength of the blur behind */
 }
 
 .loadmore-btn {
@@ -550,7 +543,7 @@ h1::selection {
   justify-content: center;
   align-items: center;
   height: auto;
-  padding: 0 400px  80px ;
+  padding: 0 400px 80px;
   gap: 80px;
   background-color: #070711;
 }
@@ -582,11 +575,8 @@ h1::selection {
   width: 350px;
   height: 350px;
   background-color: #070711;
-  /* Ensure the card itself is dark behind the iframe */
   border-radius: 20px;
-  /* Match iframe radius */
   overflow: hidden;
-  /* Clip corners */
 }
 
 .cardsix iframe {
@@ -594,7 +584,6 @@ h1::selection {
   height: 100%;
   border: 2px solid #333;
   border-radius: 20px;
-  /* Ensure iframe is transparent so body color shows */
   background: transparent;
 }
 
@@ -612,13 +601,10 @@ h1::selection {
   font-weight: bold;
   color: #ffffff;
   border-radius: 10px;
-  /* Add a slight dark background to the text so it's readable over components */
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
-  /* Optional: cool glass effect */
   cursor: pointer;
   z-index: 10;
-  /* CRITICAL: Ensures button is on top of iframe */
 }
 
 .cardsix span i {
@@ -628,4 +614,669 @@ h1::selection {
 
 .container-six button {
   margin-top: -60px;
+}
+
+
+
+
+@media (max-width: 1370px) {
+
+  .container-five {
+    padding: 6em 5%;
+    gap: 10px;
+  }
+
+  .git-container {
+    height: 30em;
+    width: 24em;
+    padding: 70px 40px;
+  }
+
+  .git-container i {
+    font-size: 4.5em;
+    margin-bottom: 8px;
+  }
+
+  .git-container h3 {
+    font-size: 2.5em;
+  }
+
+  .git-container p {
+    font-size: 1em;
+    margin-bottom: 20px;
+  }
+
+  .git-container button {
+    font-size: 1em;
+  }
+
+  .arrow-group {
+    bottom: 170px;
+    left: 95%;
+  }
+}
+
+
+
+
+@media (max-width: 1140px) {
+
+  .arrow-group {
+    bottom: 200px;
+    left: 95%;
+  }
+
+  .container-five {
+    padding: 6em 2%;
+    gap: 5px;
+  }
+
+  .git-container {
+    height: 25em;
+    width: 15em;
+    padding: 40px 10px;
+  }
+
+  .git-container i {
+    font-size: 3em;
+  }
+
+  .git-container h3 {
+    font-size: 2.2em;
+  }
+
+
+  .git-container p {
+    font-size: 1em;
+    margin-bottom: 2em;
+  }
+
+  .git-container button {
+    height: 3em;
+    width: 15em;
+    font-size: 0.9em;
+  }
+
+  .blog-container {
+    height: 25em;
+    width: 50em;
+  }
+
+  .blog-container h3 {
+    font-size: 2.2em;
+  }
+
+  .blog-container .blog-cards {
+    gap: 20px;
+  }
+
+  .card_box {
+    width: 200px;
+    height: 270px;
+  }
+
+  .card_box img {
+    width: 200px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .card_box h1 {
+    font-size: 0.8em;
+  }
+
+  .card_box p {
+    margin-top: 10px;
+    font-size: 0.7em;
+  }
+
+  .card_box:hover {
+    transform: scale(0.9);
+  }
+
+  .card_box span {
+    width: 100px;
+    height: 100px;
+  }
+
+  .card_box span::before {
+    height: 35px;
+  }
+
+  .container-six {
+    padding: 0 300px 80px;
+    gap: 20px;
+  }
+
+  .container-six .container-cards {
+    gap: 10px;
+  }
+
+  .container-cards .cardsrow {
+    gap: 10px;
+  }
+
+  .cardsix {
+    width: 300px;
+    height: 300px;
+  }
+
+  .container-six button {
+    margin-top: 0px;
+  }
+}
+
+
+
+
+@media (max-width: 992px) {
+  .sectionone h1 {
+    font-size: 3.5em;
+    padding: 0 5%;
+  }
+
+  .sectionthree h2 {
+    font-size: 3em;
+  }
+
+  .sectionthree .three-elementsone {
+    font-size: 0.9em;
+  }
+
+  .label {
+    width: 400px;
+    height: 60px;
+  }
+
+  .shortcut {
+    height: 40px;
+    width: 75px;
+  }
+
+  .search_bar {
+    font-size: 1.1em;
+  }
+
+  .sectionthree-card {
+    width: 250px;
+    height: 250px;
+  }
+
+  .card__content iframe {
+    width: 250px;
+    height: 250px;
+  }
+
+  .rows-container {
+    gap: 0.5em;
+  }
+
+  .rows-container .row {
+    gap: 0.5em;
+  }
+
+
+  .container-five {
+    padding: 6em 6em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .git-container {
+    display: flex;
+    flex-direction: column;
+    height: 20em;
+    width: 50em;
+    padding: 40px 50px;
+  }
+
+  .git-container p {
+    font-size: 1em;
+  }
+
+  .blog-container h3 {
+    font-size: 2.4em;
+    margin-bottom: 30px;
+  }
+
+  .blog-container .blog-cards {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .card_box {
+    width: 200px;
+    height: 270px;
+    border-radius: 10px;
+  }
+
+  .card_box img {
+    width: 200px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .card_box h1 {
+    font-size: 0.9em;
+  }
+
+  .card_box p {
+    font-size: 0.7em;
+  }
+
+  .card_box:hover {
+    transform: scale(0.7);
+  }
+
+  .card_box span {
+    width: 100px;
+    height: 100px;
+    top: -5px;
+    left: -5px;
+  }
+
+  .card_box span::before {
+    height: 20px;
+  }
+
+  .card_box span::after {
+    width: 10px;
+  }
+
+
+  .container-six {
+    padding: 0 250px 80px;
+    gap: 20px;
+  }
+
+  .container-six .container-cards {
+    gap: 10px;
+  }
+
+  .container-cards .cardsrow {
+    gap: 10px;
+  }
+
+  .cardsix {
+    width: 250px;
+    height: 250px;
+  }
+
+  .container-six button {
+    margin-top: 0px;
+  }
+
+  .arrow-group {
+    bottom: 190px;
+    left: 93%;
+  }
+
+}
+
+
+
+
+@media (max-width: 768px) {
+  .sectionone h1 {
+    font-size: 3em;
+    padding: 0 5%;
+  }
+
+  .container-four {
+    gap: 3em;
+    padding: 3em 5%;
+    ;
+  }
+
+  .contain-four i {
+    margin-bottom: 0em;
+  }
+
+  .contain-four h1 {
+    font-size: 3.5em;
+  }
+
+  .contain-four p {
+    width: 180px;
+    font-size: 0.9em;
+  }
+
+  .git-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 15em;
+    width: 40em;
+    padding: 0px 50px;
+  }
+
+  .git-container p {
+    font-size: 0.9em;
+  }
+
+  .blog-container {
+    height: 25em;
+    width: 40em;
+  }
+
+  .blog-container h3 {
+    font-size: 2em;
+  }
+
+  .blog-container .blog-cards {
+    gap: 10px;
+  }
+
+  .card_box {
+    width: 180px;
+    height: 250px;
+  }
+
+  .card_box img {
+    width: 180px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .card_box h1 {
+    font-size: 0.8em;
+  }
+
+  .container-six {
+    padding: 0 20px;
+  }
+
+  .cardsix {
+    width: 220px;
+    height: 220px;
+  }
+
+  .arrow-group {
+    bottom: 170px;
+    left: 92%;
+  }
+}
+
+
+
+
+@media (max-width: 576px) {
+  .container-five {
+    padding: 6em 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .git-container {
+    display: block;
+    height: 25em;
+    width: 25em;
+    text-align: left;
+    padding: 50px 50px;
+  }
+
+  .git-container i {
+    font-size: 5em;
+    color: #FF6A00;
+    margin-bottom: 10px;
+  }
+
+  .git-container h3 {
+    font-size: 2.8em;
+    font-weight: bold;
+  }
+
+  .git-container span {
+    color: #FF6A00;
+  }
+
+  .git-container p {
+    font-size: 1.2em;
+    color: gray;
+    margin-bottom: 25px;
+  }
+
+  .git-container button {
+    height: 3em;
+    width: 12em;
+    color: #fff;
+    font-size: 1.2em;
+    border: 1px solid #FF6A00;
+    border-radius: 10px;
+  }
+
+  .git-container button i {
+    margin-right: 10px;
+    font-size: 1em;
+  }
+
+  .blog-container {
+    height: 95em;
+    width: 25em;
+    text-align: center;
+    padding: 80px 50px;
+  }
+
+  .blog-container h3 {
+    font-size: 2.5em;
+    font-weight: 500;
+  }
+
+  .blog-container .blog-cards {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card_box {
+    width: 350px;
+    height: 420px;
+  }
+
+  .card_box img {
+    width: 350px;
+  }
+
+  .card_box h1 {
+    font-size: 1.2em;
+    padding: 0 10px;
+    text-align: left;
+  }
+
+  .card_box p {
+    font-size: 1.1em;
+  }
+
+
+  .container-six {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 80px;
+    gap: 30px;
+  }
+
+  .container-six h1 {
+    font-size: 2.5em;
+  }
+
+  .container-six .container-cards {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .container-cards .cardsrow {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cardsix {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 25em;
+    height: 25em;
+    background-color: #070711;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .container-four {
+    display: none;
+  }
+
+  .arrow-group {
+    bottom: 200px;
+    left: 90%;
+  }
+}
+
+
+
+
+@media (max-width: 400px) {
+
+  .carousel-track {
+    gap: 1em;
+    animation: scroll 5s linear infinite;
+    /* adjust speed */
+  }
+
+  .sectionthree .three-elementsone {
+    font-size: 1em;
+    width: 500px;
+  }
+
+  .sectionthree h2 {
+    font-size: 2.5em;
+  }
+
+  .sectionthree .three-elementstwo {
+    font-size: 0.8em;
+    width: 300px;
+    margin-bottom: 2em;
+  }
+
+  .label {
+    width: 300px;
+    height: 50px;
+    padding: 9px 8px 15px 15px;
+    text-align: left;
+
+  }
+
+  .shortcut {
+    height: 30px;
+    width: 55px;
+  }
+
+  .shortcut:hover {
+    background-color: #ff6600;
+  }
+
+  .shortcut i {
+    font-size: 15px;
+  }
+
+  .search_bar {
+    font-size: 1em;
+  }
+
+  .sectionthree-card {
+    width: 200px;
+    height: 200px;
+  }
+
+
+  .card__content iframe {
+    width: 200px;
+    height: 200px;
+  }
+
+  .loadmore-btn {
+    width: 15em;
+    height: 3em;
+    font-size: 18px;
+  }
+
+  .container-five {
+    padding: 0 2em;
+  }
+
+  .git-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20em;
+    width: 20em;
+  }
+
+  .git-container i {
+    font-size: 3em;
+    margin-bottom: 5px;
+  }
+
+  .git-container h3 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .git-container p {
+    font-size: 1em;
+  }
+
+
+  .git-container button i {
+    margin-right: 10px;
+    font-size: 1em;
+  }
+
+  .blog-container {
+    height: 75em;
+    width: 20em;
+  }
+
+  .blog-container h3 {
+    font-size: 2em;
+  }
+
+  .blog-container .blog-cards {
+    gap: 10px;
+  }
+
+  .card_box {
+    width: 280px;
+    height: 330px;
+  }
+
+  .card_box img {
+    width: 280px;
+  }
+
+  .card_box h1 {
+    font-size: 1em;
+  }
+
+  .card_box p {
+    font-size: 0.9em;
+  }
+
+  .container-six {
+    padding: 60px 50px;
+    gap: 20px;
+  }
+
+  .container-six h1 {
+    font-size: 2em;
+  }
+
+  .cardsix {
+    width: 20em;
+    height: 20em;
+  }
 }
