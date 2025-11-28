@@ -25,9 +25,10 @@ function App() {
         <Route path="/components" element={<Icons />} />
         <Route path="/about" element={<About />} />
         <Route path="/templates" element={<Templates />} />
+        <Route path="/dashboard/upload" element={<Upload />} />
       </Routes>
 
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   )
 }
