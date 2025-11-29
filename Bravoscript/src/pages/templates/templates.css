@@ -1,6 +1,6 @@
 .templatecontainer {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     padding: 8% 10%;
     flex-direction: column;
@@ -108,4 +108,172 @@
     top: -45%;
     background-color: #FF6A00;
     transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+
+
+@media (max-width: 1370px) {
+    .templatecontainer {
+        padding: 12% 10%;
+    }
+}
+
+
+
+
+@media (max-width: 1140px) {
+    .templatecontainer {
+        padding: 12% 5%;
+    }
+
+    .templatecontainer h1 {
+        padding: 20px;
+    }
+
+    .template {
+        gap: 10px;
+        width: 70vw;
+    }
+
+    .template img {
+        width: 400px;
+    }
+}
+
+
+
+
+@media (max-width: 992px) {
+    .templatecontainer {
+        padding: 15% 5%;
+    }
+
+    .templatecontainer h1 {
+        padding: 20px;
+    }
+
+    .template {
+        gap: 10px;
+        width: 80vw;
+    }
+
+    .template img {
+        width: 350px;
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    .templatecontainer {
+        padding: 18% 5%;
+    }
+
+    .template {
+        gap: 5px;
+        width: 90vw;
+    }
+
+    .template img {
+        width: 300px;
+    }
+
+    .temdetails h3 {
+        font-size: 1.2em;
+    }
+
+    .temdetails p {
+        font-size: 0.8em;
+    }
+
+    .temdetails .tem-btn {
+        margin-top: 30px;
+        gap: 10px;
+    }
+
+    .tem-btn .button {
+        font-size: 15px;
+    }
+}
+
+
+
+
+@media (max-width: 576px) {
+    .templatecontainer {
+        padding: 18% 5%;
+    }
+
+    .template {
+        gap: 5px;
+        width: 100%;
+    }
+
+    .template img {
+        width: 250px;
+    }
+
+    .temdetails h3 {
+        font-size: 1em;
+    }
+
+    .temdetails p {
+        font-size: 0.7em;
+    }
+
+    .temdetails .tem-btn {
+        margin-top: 30px;
+        gap: 10px;
+    }
+
+    .tem-btn .button {
+        font-size: 12px;
+    }
+
+    .tem-btn .button {
+        padding: 5px 20px;
+    }
+}
+
+
+
+
+@media (max-width: 400px) {
+    .templatecontainer {
+        padding: 25% 5%;
+    }
+
+    .templatecontainer h1 {
+        font-size: 1.5em;
+    }
+
+    .template {
+        flex-direction: column;
+        gap: 0px;
+        width: 100%;
+    }
+
+    .template img {
+        width: 100%;
+    }
+
+    .temdetails h3 {
+        font-size: 1.2em;
+        margin-bottom: 1%;
+    }
+
+    .temdetails p {
+        font-size: 0.9em;
+    }
+
+    .temdetails .tem-btn {
+        margin-top: 20px;
+    }
+
+    .tem-btn .button {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+
 }
