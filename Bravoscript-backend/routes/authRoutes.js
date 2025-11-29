@@ -1,9 +1,54 @@
-
 const express = require('express');
-const router = express.Router(); 
-const { db } = require('../firebase'); 
-const protectRoute = require('../middleware/authMiddleware'); 
+const router = express.Router();
+const { db, auth } = require('../firebase');
+const protectRoute = require('../middleware/authMiddleware');
 
+router.post('/login', async (req, res) => {
+    const { idToken } = req.body;
+
+    if (!idToken) {
+        return res.status(400).send({ error: 'No token provided' });
+    }
+
+    try {
+        const decodedToken = await auth.verifyIdToken(idToken);
+        const { uid, email, name, picture } = decodedToken;
+
+        const userRef = db.collection('users').doc(uid);
+        const doc = await userRef.get();
+
+        let userRole = 'user';
+
+        if (!doc.exists) {
+
+            if (email === 'sandithkariyawasam2001@gmail.com') {
+                userRole = 'admin';
+            }
+
+            await userRef.set({
+                email: email,
+                name: name || 'User',
+                picture: picture || '',
+                role: userRole,
+                createdAt: new Date().toISOString()
+            });
+            console.log(`New user created: ${email} as ${userRole}`);
+        } else {
+            const userData = doc.data();
+            userRole = userData.role || 'user';
+        }
+
+        res.status(200).json({
+            message: 'Login successful',
+            role: userRole,
+            uid: uid
+        });
+
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(401).send({ error: 'Invalid token or login failed' });
+    }
+});
 
 router.get('/', (req, res) => {
     res.status(200).send({ message: 'Auth routes module loaded.' });
@@ -18,7 +63,6 @@ router.get('/protected', protectRoute, (req, res) => {
         }
     });
 });
-
 
 router.get('/users', protectRoute, async (req, res) => {
     try {
