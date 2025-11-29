@@ -2,28 +2,25 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 
-// Import the database connection
-const db = require('./firebase');
+const { db } = require('../firebase');
 
 router.post('/send-email', async (req, res) => {
     const { name, email, message } = req.body;
 
     try {
-        // --- STEP A: Save to Firebase ---
         await db.collection('contacts').add({
             name: name,
             email: email,
             message: message,
-            submittedAt: new Date().toISOString() // Save the time
+            submittedAt: new Date().toISOString()
         });
         console.log("Data saved to Firestore");
 
-        // --- STEP B: Send Email (Your existing code) ---
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS 
+                pass: process.env.EMAIL_PASS
             }
         });
 
@@ -35,8 +32,7 @@ router.post('/send-email', async (req, res) => {
         };
 
         await transporter.sendMail(mailOptions);
-        
-        // Send success response
+
         res.status(200).json({ message: 'Data saved and email sent!' });
 
     } catch (error) {
