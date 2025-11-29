@@ -1,9 +1,8 @@
-// firebase.js
 const admin = require('firebase-admin');
 require('dotenv').config();
 
-const privateKey = process.env.FIREBASE_PRIVATE_KEY 
-    ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n') 
+const privateKey = process.env.FIREBASE_PRIVATE_KEY
+    ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
     : undefined;
 
 admin.initializeApp({
@@ -15,8 +14,11 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-
-// ADD THIS LINE TO FIX THE ERROR GLOBALLY:
 db.settings({ ignoreUndefinedProperties: true });
 
-module.exports = db;
+const auth = admin.auth();
+
+module.exports = {
+    db,
+    auth,
+};
