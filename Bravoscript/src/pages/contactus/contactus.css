@@ -1,6 +1,5 @@
 .contactone-container {
     width: 100%;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +24,8 @@ form {
     border: 2px solid #333;
 }
 
-form input, form textarea {
+form input,
+form textarea {
     padding: 10px;
     border: none;
     border-radius: 10px;
@@ -34,7 +34,8 @@ form input, form textarea {
     font-size: 1em;
 }
 
-form input::placeholder, form textarea::placeholder {
+form input::placeholder,
+form textarea::placeholder {
     color: #777;
 }
 
@@ -57,4 +58,69 @@ form button {
 
 form button:hover {
     background-color: #c24e00;
+}
+
+
+
+@media (max-width: 1370px) {
+    .contactone-container {
+        padding: 10% 0;
+    }
+}
+
+
+
+
+@media (max-width: 1140px) {
+    .contactone-container {
+        padding: 15% 0;
+    }
+}
+
+
+
+
+@media (max-width: 992px) {
+    .contactone-container {
+        padding: 15% 0;
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    .contactone-container {
+        padding: 20% 0;
+    }
+
+    form {
+        width: 70%;
+    }
+}
+
+
+
+
+@media (max-width: 576px) {
+    .contactone-container {
+        padding: 25% 0;
+    }
+
+    form {
+        width: 70%;
+    }
+}
+
+
+
+
+@media (max-width: 400px) {
+    .contactone-container {
+        padding: 30% 0;
+    }
+
+    form {
+        width: 90%;
+    }
 }
