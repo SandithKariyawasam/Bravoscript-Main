@@ -84,12 +84,12 @@
     color: #000;
 }
 
-.arrow {
+.arrows {
     font-size: 12px;
     transition: transform 0.3s;
 }
 
-.arrow.up {
+.arrows.up {
     transform: rotate(180deg);
 }
 

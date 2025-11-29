@@ -124,7 +124,7 @@ const SectionOne = () => {
                 </div>
                 <div className="iconone-two dropdown-container">
                     <div className="dropdown-trigger" onClick={toggleDropdown}>
-                        <h2>{selectedItem} <span className={`arrow ${isOpen ? 'up' : 'down'}`}>▼</span></h2>
+                        <h2>{selectedItem} <span className={`arrows ${isOpen ? 'up' : 'down'}`}>▼</span></h2>
                     </div>
                     {isOpen && (
                         <div className="iconone-list dropdown-menu">
