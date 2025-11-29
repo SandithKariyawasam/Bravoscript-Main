@@ -23,7 +23,56 @@
 }
 
 .aboutone-container ul {
-    list-style-type:square;
+    list-style-type: square;
     margin-left: 20px;
     color: #999;
+}
+
+
+
+@media (max-width: 1370px) {}
+
+
+
+
+@media (max-width: 1140px) {
+    .about-container {
+        padding: 15% 15%;
+    }
+}
+
+
+
+
+@media (max-width: 992px) {
+    .about-container {
+        padding: 15% 13%;
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    .about-container {
+        padding: 20% 13%;
+    }
+}
+
+
+
+
+@media (max-width: 576px) {
+    .about-container {
+        padding: 25% 10%;
+    }
+}
+
+
+
+
+@media (max-width: 400px) {
+    .about-container {
+        padding: 30% 10%;
+    }
 }
