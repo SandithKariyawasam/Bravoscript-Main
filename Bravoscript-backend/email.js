@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 
-const { db } = require('../firebase');
+const { db } = require('./firebase');
 
 router.post('/send-email', async (req, res) => {
     const { name, email, message } = req.body;
