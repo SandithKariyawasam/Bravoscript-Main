@@ -25,6 +25,8 @@ const SectionOne = () => {
     setStatus('Sending...');
 
     try {
+
+      // const response = await fetch('http://localhost:3000/api/send-email', {
       
       const response = await fetch('https://bravoscript-main.vercel.app/api/send-email', {
         method: 'POST',

@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 10% 0;
     gap: 50px;
     background-color: #070711;
     color: #ffffff;
@@ -13,7 +14,7 @@ h1 {
     font-size: 2em;
 }
 
-form {
+.contactone-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -24,8 +25,8 @@ form {
     border: 2px solid #333;
 }
 
-form input,
-form textarea {
+.contactone-form input,
+.contactone-form textarea {
     padding: 10px;
     border: none;
     border-radius: 10px;
@@ -34,18 +35,18 @@ form textarea {
     font-size: 1em;
 }
 
-form input::placeholder,
-form textarea::placeholder {
+.contactone-form input::placeholder,
+.contactone-form textarea::placeholder {
     color: #777;
 }
 
-form textarea {
+.contactone-form textarea {
     resize: vertical;
     min-height: 100px;
     margin-bottom: 35px;
 }
 
-form button {
+.contactone-form button {
     padding: 10px;
     border: none;
     border-radius: 10px;
@@ -56,7 +57,7 @@ form button {
     transition: background-color 0.3s ease;
 }
 
-form button:hover {
+.contactone-form button:hover {
     background-color: #c24e00;
 }
 
@@ -94,7 +95,7 @@ form button:hover {
         padding: 20% 0;
     }
 
-    form {
+    .contactone-form {
         width: 70%;
     }
 }
@@ -107,7 +108,7 @@ form button:hover {
         padding: 25% 0;
     }
 
-    form {
+    .contactone-form {
         width: 70%;
     }
 }

@@ -42,13 +42,13 @@
     font-family: "Poppins", sans-serif;
 }
 
-.tabss {
+.tabs {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
 }
 
-.tabss button {
+.tabs button {
     background: #222;
     color: white;
     border: none;
@@ -59,11 +59,11 @@
     transition: background 0.3s;
 }
 
-.tabss button:hover {
+.tabs button:hover {
     background: #333;
 }
 
-.tabss button.active {
+.tabs button.active {
     background: #FF6A00;
 }
 
