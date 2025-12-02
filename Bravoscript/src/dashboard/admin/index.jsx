@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import './index.css'
 import Dashboard from './dashboard/dashboard'
 import Upload from './upload/upload'
+import Update from './update/update'
 import Sidenav from './components/sidenav'
 
 const Index = () => {
@@ -19,6 +20,7 @@ const Index = () => {
           <Routes>
             <Route index element={<Dashboard />} />
             <Route path="create" element={<Upload />} />
+            <Route path="update" element={<Update />} />
           </Routes>
         </div>
       </div>
