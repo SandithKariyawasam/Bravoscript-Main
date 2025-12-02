@@ -26,7 +26,9 @@ router.post('/upload', async (req, res) => {
             html,
             js,
             css: css,                 
-            previewCss: aiGeneratedCss, 
+            previewCss: aiGeneratedCss,
+            userId, 
+            category ,
             createdAt: new Date()
         };
 
@@ -38,5 +40,9 @@ router.post('/upload', async (req, res) => {
         res.status(500).send("Server Error");
     }
 });
+
+router.delete('/delete/:id', snippetController.deleteCode);
+
+router.put('/update/:id', snippetController.updateCode);
 
 module.exports = router;

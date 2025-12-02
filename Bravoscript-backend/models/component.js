@@ -34,6 +34,40 @@ class SnippetModel {
             throw error;
         }
     }
+
+    static async deleteSnippet(id) {
+        try {
+            const docRef = db.collection(collectionName).doc(id);
+            const doc = await docRef.get();
+
+            if (!doc.exists) {
+                return false; // Document not found
+            }
+
+            await docRef.delete();
+            return true; // Successfully deleted
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    static async updateSnippet(id, data) {
+        try {
+            const docRef = db.collection(collectionName).doc(id);
+            const doc = await docRef.get();
+
+            if (!doc.exists) {
+                return false; // Document does not exist
+            }
+
+            // We use .update() instead of .set() to only change specific fields
+            await docRef.update(data);
+            return true;
+        } catch (error) {
+            console.error("Error in updateSnippet model:", error);
+            throw error;
+        }
+    }
 }
 
 module.exports = SnippetModel;
