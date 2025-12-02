@@ -131,12 +131,12 @@ const Update = () => {
   };
 
   return (
-    <div className="upload-con">
+    <div className="upload">
       <h2>Update Component</h2>
 
-      <div className="editor-lay">
+      <div className="editer">
 
-        <div className="code-in">
+        <div className="code">
           <form onSubmit={handleUpdate} className="code-form">
 
             <div className="tabs">
@@ -169,7 +169,7 @@ const Update = () => {
                   name="html"
                   value={formData.html}
                   onChange={handleChange}
-                  className='textarea full-height'
+                  className='codeinputs'
                   spellCheck="false"
                 />
               )}
@@ -178,7 +178,7 @@ const Update = () => {
                   name="css"
                   value={formData.css}
                   onChange={handleChange}
-                  className='textarea full-height'
+                  className='codeinputs'
                   spellCheck="false"
                 />
               )}
@@ -187,7 +187,7 @@ const Update = () => {
                   name="javascript"
                   value={formData.javascript}
                   onChange={handleChange}
-                  className='textarea full-height'
+                  className='codeinputs'
                   spellCheck="false"
                 />
               )}

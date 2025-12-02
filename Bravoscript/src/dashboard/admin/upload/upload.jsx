@@ -118,13 +118,13 @@ const Upload = () => {
   };
 
   return (
-    <div className="upload-con">
+    <div className="upload">
       <h2>Upload & Preview</h2>
 
-      <div className="editor-lay">
+      <div className="editer">
 
         {/* LEFT SIDE: Code Editor */}
-        <div className="code-in">
+        <div className="code">
           <form onSubmit={handleSubmit} className="code-form">
 
 
@@ -162,7 +162,7 @@ const Upload = () => {
                   placeholder="<h1>Hello World</h1>"
                   value={formData.html}
                   onChange={handleChange}
-                  className='textarea full-height'
+                  className='codeinputs'
                   spellCheck="false"
                 />
               )}
@@ -172,7 +172,7 @@ const Upload = () => {
                   placeholder="body { background: #000; }"
                   value={formData.css}
                   onChange={handleChange}
-                  className='textarea full-height'
+                  className='codeinputs'
                   spellCheck="false"
                 />
               )}
@@ -182,7 +182,7 @@ const Upload = () => {
                   placeholder="console.log('Hello');"
                   value={formData.javascript}
                   onChange={handleChange}
-                  className='textarea full-height'
+                  className='codeinputs'
                   spellCheck="false"
                 />
               )}
