@@ -81,7 +81,6 @@ const Auth = ({ onClose, onLoginSuccess }) => {
       } else {
         console.log("Existing user logged in:", user.email);
         await sendTokenToBackend(user);
-        alert("Login Successful!");
       }
 
     } catch (error) {
@@ -105,9 +104,9 @@ const Auth = ({ onClose, onLoginSuccess }) => {
         onClose();
 
         if (role === 'admin') {
-          navigate('/admin-dashboard');
+          navigate('/admin/dashboard');
         } else {
-          navigate('/details');
+          navigate('/user/dashboard');
         }
 
       } catch (error) {
