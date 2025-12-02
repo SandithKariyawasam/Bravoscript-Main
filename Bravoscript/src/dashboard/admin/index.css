@@ -1,0 +1,16 @@
+.index {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: white;
+    padding: 8% 0 0 0;
+    gap: 50px;
+}
+
+
+.index .index-content {
+    border-top: 2px solid gray;
+    width: 100%;
+}
