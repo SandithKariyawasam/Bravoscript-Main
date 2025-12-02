@@ -88,7 +88,7 @@ const SectionOne = () => {
             </div>
 
             <div className="codes">
-                <div className="tabs">
+                <div className="tabss">
                     <button
                         className={activeTab === "html" ? "active" : ""}
                         onClick={() => setActiveTab("html")}
