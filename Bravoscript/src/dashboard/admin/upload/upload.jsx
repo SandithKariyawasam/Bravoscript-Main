@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { initializeApp, getApps } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import "./upload.css"
+import "./Upload.css"
 
 const firebaseConfig = {
   apiKey: "AIzaSyCNyKCyDS-SAY3pgWCTe3ZV56h6PbIXfkQ",
@@ -18,15 +18,17 @@ const auth = getAuth(app);
 
 const Upload = () => {
   const [user, setUser] = useState(null);
+
+  // Added 'category' to formData
   const [formData, setFormData] = useState({
     html: '',
     css: '',
-    javascript: ''
+    javascript: '',
+    category: 'Buttons' // Default category
   });
 
-  // --- NEW: State for the Active Tab (html, css, or javascript) ---
   const [activeTab, setActiveTab] = useState('html');
-
+  const [isOpen, setIsOpen] = useState(false);
   const [srcDoc, setSrcDoc] = useState('');
   const [status, setStatus] = useState(null);
   const [generatedId, setGeneratedId] = useState('');
@@ -38,71 +40,42 @@ const Upload = () => {
     return () => unsubscribe();
   }, []);
 
+  // Debounce logic for live preview
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setSrcDoc(`
-      <html>
-        <head>
-          <style>
-            /* ==== Your Custom CSS ==== */
-            ${formData.css}
-
-            /* ==== Scrollbar Styling ==== */
-            /* Chrome / Brave / Edge */
-            ::-webkit-scrollbar {
-                width: 10px;
-                /* vertical scrollbar width */
-            }
-
-            ::-webkit-scrollbar-thumb {
-                background-color: #555;
-                /* draggable thumb */
-                border-radius: 0px;
-            }
-
-            ::-webkit-scrollbar-track {
-                background: #00000000;
-            }
-
-            ::-webkit-scrollbar-button {
-                display: none;
-                /* hide top/bottom arrows */
-            }
-
-            ::-webkit-scrollbar-thumb:hover {
-                background-color: #888;
-            }
-
-            /* Prevent unwanted margin */
-            body {
-              margin: 0;
-              padding: 0;
-            }
-          </style>
-        </head>
-
-        <body>
-          ${formData.html}
-
-          <script>
-            try {
-              ${formData.javascript}
-            } catch(e) {
-              console.error(e);
-            }
-          </script>
-        </body>
-      </html>
-    `);
+        <html>
+          <head>
+            <style>
+              ${formData.css}
+              ::-webkit-scrollbar { width: 10px; }
+              ::-webkit-scrollbar-thumb { background-color: #555; border-radius: 0px; }
+              ::-webkit-scrollbar-track { background: #00000000; }
+              body { margin: 0; padding: 0; }
+            </style>
+          </head>
+          <body>
+            ${formData.html}
+            <script>
+              try { ${formData.javascript} } catch(e) { console.error(e); }
+            </script>
+          </body>
+        </html>
+      `);
     }, 250);
-
     return () => clearTimeout(timeOut);
   }, [formData]);
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const handleSelect = (category) => {
+    setFormData({ ...formData, category: category });
+    setIsOpen(false);
   };
 
   const handleSubmit = async (e) => {
@@ -122,7 +95,7 @@ const Upload = () => {
         userId: user.uid,
       };
 
-      const response = await fetch('http://localhost:3000/api/code/save', {
+      const response = await fetch('https://bravoscript-main.vercel.app/api/code/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -137,7 +110,6 @@ const Upload = () => {
         setStatus('error');
         setGeneratedId(data.message);
       }
-
     } catch (error) {
       console.error("Error:", error);
       setStatus('error');
@@ -155,7 +127,9 @@ const Upload = () => {
         <div className="code-in">
           <form onSubmit={handleSubmit} className="code-form">
 
-            {/* --- NEW: Tab Buttons --- */}
+
+
+            {/* Tab Buttons */}
             <div className="tabs">
               <button
                 type="button"
@@ -180,9 +154,8 @@ const Upload = () => {
               </button>
             </div>
 
-            {/* --- Conditional Rendering of Textareas --- */}
+            {/* Textareas */}
             <div className="form-grp expanded">
-
               {activeTab === 'html' && (
                 <textarea
                   name="html"
@@ -193,7 +166,6 @@ const Upload = () => {
                   spellCheck="false"
                 />
               )}
-
               {activeTab === 'css' && (
                 <textarea
                   name="css"
@@ -204,7 +176,6 @@ const Upload = () => {
                   spellCheck="false"
                 />
               )}
-
               {activeTab === 'javascript' && (
                 <textarea
                   name="javascript"
@@ -217,16 +188,63 @@ const Upload = () => {
               )}
             </div>
 
+            {/* --- NEW: Category Dropdown --- */}
+            <div className="iconone-two dropdown-con">
+              <label className="input-lab">Select Category</label>
+              <div className="dropdown-tri" onClick={toggleDropdown}>
+                <h2>
+                  {formData.category}
+                  <span className={`arr ${isOpen ? 'up' : 'down'}`}>▼</span>
+                </h2>
+              </div>
+
+              {isOpen && (
+                <div className="iconone-list dropdown-me">
+                  {/* Column 1 */}
+                  <ul>
+                    <li onClick={() => handleSelect('All')}>All</li>
+                    <li onClick={() => handleSelect('Checkbox')}>Checkbox</li>
+                    <li onClick={() => handleSelect('Cards')}>Cards</li>
+                    <li onClick={() => handleSelect('Inputs')}>Inputs</li>
+                    <li onClick={() => handleSelect('Forms')}>Forms</li>
+                    <li onClick={() => handleSelect('Tooltips')}>Tooltips</li>
+                  </ul>
+                  {/* Column 2 */}
+                  <ul>
+                    <li onClick={() => handleSelect('Buttons')}>Buttons</li>
+                    <li onClick={() => handleSelect('Toggle Switches')}>Toggle Switches</li>
+                    <li onClick={() => handleSelect('Loaders')}>Loaders</li>
+                    <li onClick={() => handleSelect('Radio Buttons')}>Radio Buttons</li>
+                    <li onClick={() => handleSelect('3D')}>3D</li>
+                    <li onClick={() => handleSelect('Others')}>Others</li>
+                  </ul>
+                </div>
+              )}
+            </div>
+
             {/* Action Bar (Save Button + Status) */}
             <div className="action-bar">
-              <button type="submit" className="save-btn" disabled={!user}>
-                {user ? "Save Code" : "Login to Save"}
+              <button
+                type="submit"
+                className="save-btn"
+                disabled={!user || status === 'Saving...'}
+              >
+                {status === 'Saving...' ? (
+                  <div className="load"></div>
+                ) : (
+                  user ? "Save Code" : "Login to Save"
+                )}
               </button>
 
+              {/* Success Message */}
               {status === 'success' && (
                 <span className="success-msg">Saved! ID: <strong>{generatedId}</strong></span>
               )}
-              {status === 'error' && <span className="error-msg">{generatedId}</span>}
+
+              {/* Error Message */}
+              {status === 'error' && (
+                <span className="error-msg">{generatedId}</span>
+              )}
             </div>
           </form>
         </div>
