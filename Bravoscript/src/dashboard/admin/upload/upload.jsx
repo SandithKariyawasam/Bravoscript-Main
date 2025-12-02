@@ -124,7 +124,7 @@ const Upload = () => {
       <div className="editer">
 
         {/* LEFT SIDE: Code Editor */}
-        <div className="code">
+        <div className="codess">
           <form onSubmit={handleSubmit} className="code-form">
 
 

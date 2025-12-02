@@ -116,6 +116,7 @@ const SectionOne = () => {
                             value={html}
                             onChange={(e) => setHtml(e.target.value)}
                             placeholder="Write HTML code here..."
+                            className='codeinputer'
                         />
                     )}
                     {activeTab === "css" && (
@@ -124,6 +125,7 @@ const SectionOne = () => {
                             value={css}
                             onChange={(e) => setCss(e.target.value)}
                             placeholder="Write CSS code here..."
+                            className='codeinputer'
                         />
                     )}
                     {activeTab === "js" && (
@@ -132,6 +134,7 @@ const SectionOne = () => {
                             value={js}
                             onChange={(e) => setJs(e.target.value)}
                             placeholder="Write JavaScript code here..."
+                            className='codeinputer'
                         />
                     )}
                 </div>

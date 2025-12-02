@@ -136,7 +136,7 @@ const Update = () => {
 
       <div className="editer">
 
-        <div className="code">
+        <div className="codess">
           <form onSubmit={handleUpdate} className="code-form">
 
             <div className="tabs">
