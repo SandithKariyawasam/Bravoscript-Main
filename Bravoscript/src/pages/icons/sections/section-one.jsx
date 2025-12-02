@@ -115,6 +115,11 @@ const SectionOne = () => {
         console.log(`Selected: ${item}`);
     };
 
+    const filteredSnippets = snippets.filter((item) => {
+        if (selectedItem === "All") return true;
+        return item.category === selectedItem;
+    });
+
     return (
         <div className="iconone">
             <div className="iconone-main">
@@ -152,16 +157,23 @@ const SectionOne = () => {
             <div className="parent">
                 <div className="child">
 
-                    {snippets.length > 0 ? (
-                        snippets.map((item) => (
+                    {/* --- UPDATED: Use filteredSnippets instead of snippets --- */}
+                    {filteredSnippets.length > 0 ? (
+                        filteredSnippets.map((item) => (
                             <ComponentCard item={item} key={item._id || item.id} />
                         ))
                     ) : (
-                        <div className="loader-wrap">
-                            <div class="loader">
-                                <div class="justify-content-center jimu-primary-loading"></div>
+                        snippets.length === 0 ? (
+                            <div className="loader-wrap">
+                                <div className="loader">
+                                    <div className="justify-content-center jimu-primary-loading"></div>
+                                </div>
                             </div>
-                        </div>
+                        ) : (
+                            <div style={{ color: 'white', textAlign: 'center', width: '100%', marginTop: '50px' }}>
+                                <h3>No components found in "{selectedItem}"</h3>
+                            </div>
+                        )
                     )}
 
                 </div>
