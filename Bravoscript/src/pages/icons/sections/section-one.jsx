@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
 
 const SectionOne = () => {
     const [snippets, setSnippets] = useState([]);
+    const navigate = useNavigate(); // 2. Initialize hook
 
     const getSrcDoc = (html, css, js) => {
-
         const cleanHtml = html
             .replace(/<script[^>]*src=".*\/main\.j(s|sx)"[^>]*>[\s\S]*?<\/script>/gi, "")
             .replace(/<script\b[^>]*src=["'](?!http)[^"']*["'][^>]*>[\s\S]*?<\/script>/gi, "")
@@ -13,54 +14,16 @@ const SectionOne = () => {
         return `
         <html>
           <head>
-            <script>
-              window.addEventListener('error', function(e) {
-                console.error("Snippet Error:", e.error);
-              });
-            </script>
-
             <style>
-                /* --- 2. SYSTEM RESETS --- */
-                html, body {
-                    margin: 0 !important;
-                    padding: 0 !important;
-                    width: 100%;
-                    height: 100vh;
-                    overflow: hidden;
-                    background-color: transparent;
-                }
-
-                /* --- 3. CENTER THE PREVIEW --- */
-                body {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    cursor: pointer;
-                }
-
-                #preview-wrapper {
-                    width: 100%;
-                    height: 100%; 
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    transform: scale(1); /* Subtle zoom out to prevent scrollbars */
-                    transform-origin: center center;
-                }
-
-                /* --- 4. USER CSS --- */
+                html, body { margin: 0 !important; padding: 0 !important; width: 100%; height: 100vh; overflow: hidden; background-color: transparent; }
+                body { display: flex; justify-content: center; align-items: center; cursor: pointer; }
+                #preview-wrapper { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; transform: scale(1); transform-origin: center center; }
                 ${css}
             </style>
           </head>
           <body>
-            
-            <div id="preview-wrapper">
-                ${cleanHtml}
-            </div>
-
-            <script type="module">
-                ${js}
-            </script>
+            <div id="preview-wrapper">${cleanHtml}</div>
+            <script type="module">${js}</script>
           </body>
         </html>
     `;
@@ -71,20 +34,22 @@ const SectionOne = () => {
             try {
                 const res = await fetch('https://bravoscript-main.vercel.app/api/code/latest');
                 const data = await res.json();
-
                 if (Array.isArray(data)) {
                     const validItems = data.filter(item => item.size !== 'Large');
-
                     setSnippets(validItems);
                 }
             } catch (error) {
                 console.error("Error loading SectionOne:", error);
             }
         };
-
         fetchComponents();
     }, []);
 
+    // --- NEW: Handle Navigation ---
+    const handleGetCode = (item) => {
+        // Navigate to '/details' and pass the item data in state
+        navigate('/details', { state: { snippetData: item } });
+    };
 
     const ComponentCard = ({ item }) => (
         <div className="divone" key={item._id || item.id} style={{ width: '100%', height: '350px' }}>
@@ -96,8 +61,9 @@ const SectionOne = () => {
                 loading="lazy"
                 style={{ width: '100%', height: '100%', border: 'none', borderRadius: '10px' }}
             />
-            <span onClick={() => navigator.clipboard.writeText(item.css)}>
-                <i className="fa-duotone fa-solid fa-code"></i>Get code
+            {/* 3. Update onClick to trigger navigation */}
+            <span onClick={() => handleGetCode(item)} style={{cursor: 'pointer'}}>
+                <i className="fa-duotone fa-solid fa-code"></i> Get code
             </span>
         </div>
     );
@@ -105,14 +71,10 @@ const SectionOne = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState("All");
 
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
-
+    const toggleDropdown = () => setIsOpen(!isOpen);
     const handleSelect = (item) => {
         setSelectedItem(item);
         setIsOpen(false);
-        console.log(`Selected: ${item}`);
     };
 
     const filteredSnippets = snippets.filter((item) => {
@@ -156,8 +118,6 @@ const SectionOne = () => {
 
             <div className="parent">
                 <div className="child">
-
-                    {/* --- UPDATED: Use filteredSnippets instead of snippets --- */}
                     {filteredSnippets.length > 0 ? (
                         filteredSnippets.map((item) => (
                             <ComponentCard item={item} key={item._id || item.id} />
@@ -175,7 +135,6 @@ const SectionOne = () => {
                             </div>
                         )
                     )}
-
                 </div>
             </div>
         </div>
