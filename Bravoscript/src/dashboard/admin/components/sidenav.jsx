@@ -1,29 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
-import { auth } from '../../../firebase'; // Import the shared auth instance
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../../../firebase';
 import './sidenav.css';
+
+import defaultUserImage from '../../../assets/images/user.jpg';
 
 const Sidenav = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [profileImage, setProfileImage] = useState(defaultUserImage);
+
   const isActive = (path) => (location.pathname === path ? "isActive" : "");
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser && currentUser.photoURL) {
+        setProfileImage(currentUser.photoURL);
+      } else {
+        setProfileImage(defaultUserImage);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleLogout = async () => {
     try {
-      // 1. Sign out from Firebase
       await signOut(auth);
-
-      // 2. Clear local storage (removes the role)
       localStorage.removeItem('userRole');
-
-      // 3. Redirect to Home (or refresh the page to update App.js state)
       navigate('/');
-
-      // Optional: Force a reload to ensure App.js state clears immediately
       window.location.reload();
-
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -34,22 +42,28 @@ const Sidenav = () => {
       <div className="side-menu">
 
         <button className='side-item'>
-          <span ><Link to="/admin/dashboard/" id={isActive("/admin/dashboard/")}>Dashboard</Link></span>
+          <span><Link to="/admin/dashboard/" id={isActive("/admin/dashboard/")}>Dashboard</Link></span>
         </button>
         <button className='side-item'>
-          <span ><Link to="/admin/dashboard/create" id={isActive("/admin/dashboard/create")}>Create</Link></span>
+          <span><Link to="/admin/dashboard/create" id={isActive("/admin/dashboard/create")}>Create</Link></span>
         </button>
         <button className='side-item'>
-          <span ><Link to="/admin/dashboard/users" id={isActive("/admin/dashboard/users")}>Users</Link></span>
+          <span><Link to="/admin/dashboard/users" id={isActive("/admin/dashboard/users")}>Users</Link></span>
         </button>
         <button className='side-item'>
-          <span ><Link to="/admin/dashboard/myprofile" id={isActive("/admin/dashboard/myprofile")}>My Account</Link></span>
+          <span><Link to="/admin/dashboard/myprofile" id={isActive("/admin/dashboard/myprofile")}>My Account</Link></span>
         </button>
 
-        {/* Add onClick handler to the logout button */}
         <button className='side-item' onClick={handleLogout}>
           <span style={{ color: "red" }}>Logout</span>
         </button>
+
+        {/* 5. Update src to use the dynamic state variable */}
+        <img
+          src={profileImage}
+          alt='User Profile'
+          style={{ height: '60px', borderRadius: '50%', marginLeft: '600px' }}
+        />
       </div>
     </>
   )
