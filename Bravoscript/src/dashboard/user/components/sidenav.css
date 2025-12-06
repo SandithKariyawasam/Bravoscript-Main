@@ -1,0 +1,35 @@
+.side-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.side-menu button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+#isActive {
+    color: #FF6A00;
+}
+
+.side-item {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.side-item a:hover {
+    color: #FF6A00;
+}
