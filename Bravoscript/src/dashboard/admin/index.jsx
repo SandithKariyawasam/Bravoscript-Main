@@ -4,6 +4,7 @@ import Dashboard from './dashboard/dashboard'
 import Upload from './upload/upload'
 import Update from './update/update'
 import Sidenav from './components/sidenav'
+import User from './user/user'
 
 const Index = () => {
   return (
@@ -21,6 +22,7 @@ const Index = () => {
             <Route index element={<Dashboard />} />
             <Route path="create" element={<Upload />} />
             <Route path="update" element={<Update />} />
+            <Route path="users" element={<User />} />
           </Routes>
         </div>
       </div>
