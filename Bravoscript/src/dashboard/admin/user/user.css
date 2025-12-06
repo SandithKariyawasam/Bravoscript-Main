@@ -1,0 +1,83 @@
+.users-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2% 5%;
+    height: 100%;
+    gap: 50px;
+    color: #999;
+}
+
+.admin-container h1 {
+    color: #fff;
+}
+
+.user-container h1 {
+    color: #fff;
+}
+
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    background-color: #111;
+    border: 2px solid #333;
+    border-radius: 20px;
+    gap: 30px;
+}
+
+.admin-container table {
+    text-align: center;
+    border: 2px solid #333;
+    width: 150vh;
+    border-collapse: collapse;
+}
+
+table th {
+    border-bottom: 2px solid #333;
+    margin-bottom: 10px;
+    height: 50px;
+}
+
+table td {
+    border-bottom: 2px solid #333;
+    height: 50px;
+}
+
+table td img {
+    width: 25px;
+}
+
+.user-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    background-color: #111;
+    border: 2px solid #333;
+    border-radius: 20px;
+    gap: 30px;
+}
+
+.user-container table {
+    text-align: center;
+    border: 2px solid #333;
+    width: 150vh;
+    border-collapse: collapse;
+}
+
+table td .btn-update {
+    height: 30px;
+    width: 80px;
+    background-color: #007bff;
+}
+
+table td .btn-delete {
+    height: 30px;
+    width: 80px;
+    background-color: #dc3545;
+}
