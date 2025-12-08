@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { signOut, onAuthStateChanged } from "firebase/auth"; 
-import { auth } from '../../../firebase'; 
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../../../firebase';
 import './sidenav.css';
 
-import defaultUserImage from '../../../assets/images/user.jpg'; 
+import defaultUserImage from '../../../assets/images/user.jpg';
 
 const Sidenav = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const [profileImage, setProfileImage] = useState(defaultUserImage);
 
   const isActive = (path) => (location.pathname === path ? "isActive" : "");
@@ -47,19 +47,16 @@ const Sidenav = () => {
         <button className='side-item'>
           <span><Link to="/user/dashboard/create" id={isActive("/admin/dashboard/create")}>Create</Link></span>
         </button>
-        <button className='side-item'>
-          <span><Link to="/user/dashboard/myprofile" id={isActive("/admin/dashboard/myprofile")}>My Account</Link></span>
-        </button>
 
         <button className='side-item' onClick={handleLogout}>
           <span style={{ color: "red" }}>Logout</span>
         </button>
 
         {/* 5. Update src to use the dynamic state variable */}
-        <img 
-            src={profileImage} 
-            alt='User Profile' 
-            style={{height:'60px', borderRadius:'50%', marginLeft:'600px'}}
+        <img
+          src={profileImage}
+          alt='User Profile'
+          style={{ height: '60px', borderRadius: '50%', marginLeft: '600px' }}
         />
       </div>
     </>
