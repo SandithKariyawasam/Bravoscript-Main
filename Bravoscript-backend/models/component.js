@@ -41,11 +41,11 @@ class SnippetModel {
             const doc = await docRef.get();
 
             if (!doc.exists) {
-                return false; // Document not found
+                return false; 
             }
 
             await docRef.delete();
-            return true; // Successfully deleted
+            return true; 
         } catch (error) {
             throw error;
         }
@@ -57,14 +57,31 @@ class SnippetModel {
             const doc = await docRef.get();
 
             if (!doc.exists) {
-                return false; // Document does not exist
+                return false; 
             }
 
-            // We use .update() instead of .set() to only change specific fields
             await docRef.update(data);
             return true;
         } catch (error) {
             console.error("Error in updateSnippet model:", error);
+            throw error;
+        }
+    }
+
+    static async getSnippetsByUser(userId) {
+        try {
+            const snapshot = await db.collection(collectionName)
+                .where('userId', '==', userId)
+                .orderBy('createdAt', 'desc') 
+                .get();
+
+            if (snapshot.empty) {
+                return [];
+            }
+
+            return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        } catch (error) {
+            console.error("Error in getSnippetsByUser:", error);
             throw error;
         }
     }

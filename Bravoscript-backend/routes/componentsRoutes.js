@@ -25,10 +25,10 @@ router.post('/upload', async (req, res) => {
             title,
             html,
             js,
-            css: css,                 
+            css: css,
             previewCss: aiGeneratedCss,
-            userId, 
-            category ,
+            userId,
+            category,
             createdAt: new Date()
         };
 
@@ -44,5 +44,7 @@ router.post('/upload', async (req, res) => {
 router.delete('/delete/:id', snippetController.deleteCode);
 
 router.put('/update/:id', snippetController.updateCode);
+
+router.get('/user/:userId', snippetController.getUserSnippets);
 
 module.exports = router;

@@ -27,9 +27,8 @@ const saveCode = async (req, res) => {
             html: html || "",
             css: css || "",
             javascript: javascript || "",
-            previewCss: previewCss, // Save the AI version
+            previewCss: previewCss, 
             userId: userId || "anonymous",
-            // --- UPDATED: Save the category (Default to 'Others' if missing)
             category: category || "Others",
             createdAt: new Date().toISOString()
         };
@@ -82,21 +81,16 @@ const deleteCode = async (req, res) => {
     try {
         const { id } = req.params;
 
-        // 1. Check if ID is provided
         if (!id) {
             return res.status(400).json({ message: "Snippet ID is required" });
         }
 
-        // 2. Perform the delete operation
-        // We call the deleteSnippet function from your Model wrapper
         const result = await SnippetModel.deleteSnippet(id);
 
-        // 3. Handle result
         if (!result) {
             return res.status(404).json({ message: "Snippet not found or could not be deleted" });
         }
 
-        // 4. Success response
         res.status(200).json({ message: "Snippet deleted successfully" });
 
     } catch (error) {
@@ -111,14 +105,10 @@ const updateCode = async (req, res) => {
         const { id } = req.params;
         const { html, css, javascript, category, userId } = req.body;
 
-        // 1. Validate ID
         if (!id) {
             return res.status(400).json({ message: "Snippet ID is required" });
         }
 
-        // 2. Prepare Update Data
-        // We typically don't update the 'userId' to prevent ownership theft, 
-        // but we update the code and the category.
         const updateData = {
             html: html || "",
             css: css || "",
@@ -127,10 +117,8 @@ const updateCode = async (req, res) => {
             updatedAt: new Date().toISOString()
         };
 
-        // 3. Call Model
         const result = await SnippetModel.updateSnippet(id, updateData);
 
-        // 4. Handle Response
         if (!result) {
             return res.status(404).json({ message: "Snippet not found" });
         }
@@ -143,5 +131,18 @@ const updateCode = async (req, res) => {
     }
 };
 
+const getUserSnippets = async (req, res) => {
+    try {
+        const { userId } = req.params;
 
-module.exports = { saveCode, getCode, getLatestCodes, deleteCode, updateCode };
+        const snippets = await SnippetModel.getSnippetsByUser(userId);
+
+        res.status(200).json(snippets);
+    } catch (error) {
+        console.error("Error fetching user snippets:", error);
+        res.status(500).json({ message: "Server Error" });
+    }
+};
+
+
+module.exports = { saveCode, getCode, getLatestCodes, deleteCode, updateCode, getUserSnippets };
