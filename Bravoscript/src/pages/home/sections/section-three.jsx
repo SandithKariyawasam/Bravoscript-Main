@@ -1,9 +1,13 @@
+// 1. Import useNavigate
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SectionThree = () => {
     const [snippets, setSnippets] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate(); // Initialize hook
 
     const row = Array.from({ length: 8 });
 
@@ -67,6 +71,19 @@ const SectionThree = () => {
         return item.category && item.category.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
+    // --- Navigation Logic ---
+    const handleSearch = () => {
+        if (searchTerm.trim()) {
+            navigate('/components', { state: { searchTerm } });
+        }
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
     // --- 3. SUB-COMPONENT: The Card ---
     const SnippetCard = ({ item }) => {
         // If loading, show placeholder
@@ -116,13 +133,16 @@ const SectionThree = () => {
             </p>
 
             <label className="label">
-                <div className="shortcut"><i className="fa-solid fa-magnifying-glass"></i></div>
-                <input 
-                    type="text" 
-                    className="search_bar" 
-                    placeholder="Search Components... (e.g., Buttons, Loaders)" 
+                <div className="shortcut" onClick={handleSearch} style={{ cursor: 'pointer' }}>
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <input
+                    type="text"
+                    className="search_bar"
+                    placeholder="Search Components... (e.g., Buttons, Loaders)"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={handleKeyDown}
                 />
             </label>
 

@@ -1,32 +1,40 @@
+// 1. Import useNavigate and useLocation
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SectionOne = () => {
     const [snippets, setSnippets] = useState([]);
-    const navigate = useNavigate(); // 2. Initialize hook
+    const navigate = useNavigate();
+    const location = useLocation(); // Initialize location hook
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedItem, setSelectedItem] = useState("All");
+    const [searchTerm, setSearchTerm] = useState(""); // New state for search term
 
     const getSrcDoc = (html, css, js) => {
         const cleanHtml = html
-            .replace(/<script[^>]*src=".*\/main\.j(s|sx)"[^>]*>[\s\S]*?<\/script>/gi, "")
-            .replace(/<script\b[^>]*src=["'](?!http)[^"']*["'][^>]*>[\s\S]*?<\/script>/gi, "")
-            .replace(/<link\b[^>]*rel=["']stylesheet["'][^>]*href=["'](?!http)[^"']*["'][^>]*>/gi, "");
+            ? html
+                .replace(/<script[^>]*src=".*\/main\.j(s|sx)"[^>]*>[\s\S]*?<\/script>/gi, "")
+                .replace(/<script\b[^>]*src=["'](?!http)[^"']*["'][^>]*>[\s\S]*?<\/script>/gi, "")
+                .replace(/<link\b[^>]*rel=["']stylesheet["'][^>]*href=["'](?!http)[^"']*["'][^>]*>/gi, "")
+            : "";
 
         return `
-        <html>
-          <head>
-            <style>
-                html, body { margin: 0 !important; padding: 0 !important; width: 100%; height: 100vh; overflow: hidden; background-color: transparent; }
-                body { display: flex; justify-content: center; align-items: center; cursor: pointer; }
-                #preview-wrapper { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; transform: scale(1); transform-origin: center center; }
-                ${css}
-            </style>
-          </head>
-          <body>
-            <div id="preview-wrapper">${cleanHtml}</div>
-            <script type="module">${js}</script>
-          </body>
-        </html>
-    `;
+            <html>
+              <head>
+                <style>
+                    html, body { margin: 0 !important; padding: 0 !important; width: 100%; height: 100vh; overflow: hidden; background-color: transparent; }
+                    body { display: flex; justify-content: center; align-items: center; cursor: pointer; }
+                    #preview-wrapper { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; transform: scale(1); transform-origin: center center; }
+                    ${css}
+                </style>
+              </head>
+              <body>
+                <div id="preview-wrapper">${cleanHtml}</div>
+                <script type="module">${js}</script>
+              </body>
+            </html>
+        `;
     };
 
     useEffect(() => {
@@ -45,6 +53,16 @@ const SectionOne = () => {
         fetchComponents();
     }, []);
 
+    // --- EFFECT: Check for incoming search term ---
+    useEffect(() => {
+        if (location.state && location.state.searchTerm) {
+            setSearchTerm(location.state.searchTerm);
+            // Verify passed search term
+            console.log("Searching for:", location.state.searchTerm);
+        }
+    }, [location.state]);
+
+
     // --- NEW: Handle Navigation ---
     const handleGetCode = (item) => {
         // Navigate to '/details' and pass the item data in state
@@ -62,22 +80,25 @@ const SectionOne = () => {
                 style={{ width: '100%', height: '100%', border: 'none', borderRadius: '10px' }}
             />
             {/* 3. Update onClick to trigger navigation */}
-            <span onClick={() => handleGetCode(item)} style={{cursor: 'pointer'}}>
+            <span onClick={() => handleGetCode(item)} style={{ cursor: 'pointer' }}>
                 <i className="fa-duotone fa-solid fa-code"></i> Get code
             </span>
         </div>
     );
 
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState("All");
-
     const toggleDropdown = () => setIsOpen(!isOpen);
     const handleSelect = (item) => {
         setSelectedItem(item);
+        setSearchTerm(""); // Clear search term when user manually selects a category
         setIsOpen(false);
     };
 
     const filteredSnippets = snippets.filter((item) => {
+        // Priority 1: Search Term
+        if (searchTerm) {
+            return item.category && item.category.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        // Priority 2: Dropdown Selection
         if (selectedItem === "All") return true;
         return item.category === selectedItem;
     });
