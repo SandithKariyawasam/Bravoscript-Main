@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 const SectionThree = () => {
     const [snippets, setSnippets] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const row = Array.from({ length: 8 });
 
@@ -41,6 +43,7 @@ const SectionThree = () => {
 
     useEffect(() => {
         const fetchLatest = async () => {
+            setLoading(true);
             try {
                 const res = await fetch('https://bravoscript-main.vercel.app/api/code/latest');
                 const data = await res.json();
@@ -50,15 +53,24 @@ const SectionThree = () => {
                 }
             } catch (error) {
                 console.error("Error loading snippets:", error);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchLatest();
     }, []);
 
+    // Filter Logic
+    const filteredSnippets = snippets.filter((item) => {
+        if (!searchTerm) return true;
+        return item.category && item.category.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
     // --- 3. SUB-COMPONENT: The Card ---
     const SnippetCard = ({ item }) => {
-        if (!item) {
+        // If loading, show placeholder
+        if (loading && !item) {
             return (
                 <div className="sectionthree-card">
                     <div className="card__content">
@@ -70,6 +82,11 @@ const SectionThree = () => {
                     </div>
                 </div>
             )
+        }
+
+        // If not loading and no item, show nothing (empty slot)
+        if (!item) {
+            return <div className="sectionthree-card" style={{ visibility: 'hidden', pointerEvents: 'none' }}></div>;
         }
 
         return (
@@ -100,7 +117,13 @@ const SectionThree = () => {
 
             <label className="label">
                 <div className="shortcut"><i className="fa-solid fa-magnifying-glass"></i></div>
-                <input type="text" className="search_bar" placeholder="Search Components..." />
+                <input 
+                    type="text" 
+                    className="search_bar" 
+                    placeholder="Search Components... (e.g., Buttons, Loaders)" 
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
             </label>
 
             <div className="rows-container">
@@ -108,21 +131,21 @@ const SectionThree = () => {
                 {/* --- ROW 1 (Items 0 to 8) --- */}
                 <div className="row" style={{ marginLeft: "10em" }}>
                     {row.map((_, i) => (
-                        <SnippetCard item={snippets[i]} key={`r1-${i}`} />
+                        <SnippetCard item={filteredSnippets[i]} key={`r1-${i}`} />
                     ))}
                 </div>
 
                 {/* --- ROW 2 (Items 8 to 16) --- */}
                 <div className="row" style={{ marginRight: "10em" }}>
                     {row.map((_, i) => (
-                        <SnippetCard item={snippets[i + 8]} key={`r2-${i}`} />
+                        <SnippetCard item={filteredSnippets[i + 8]} key={`r2-${i}`} />
                     ))}
                 </div>
 
                 {/* --- ROW 3 (Items 16 to 24) --- */}
                 <div className="row rowthree" style={{ marginLeft: "10em" }}>
                     {row.map((_, i) => (
-                        <SnippetCard item={snippets[i + 16]} key={`r3-${i}`} />
+                        <SnippetCard item={filteredSnippets[i + 16]} key={`r3-${i}`} />
                     ))}
                     <div className="blur-overlay"></div>
                 </div>
